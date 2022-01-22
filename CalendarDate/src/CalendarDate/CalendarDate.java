@@ -87,7 +87,7 @@ public class CalendarDate {
 		int nextMonth = this.month;
 		int nextYear = this.year;
 
-		if ((this.day + 1 > monthLen[this.month - 1]) && (isLeapYear(this.year) && (this.day + 1 > monthLenLeap[this.month - 1]))) {
+		if ((!(isLeapYear(year)) && (this.day + 1 > monthLen[this.month - 1])) || (isLeapYear(this.year) && (this.day + 1 > monthLenLeap[this.month - 1]))) {
 				if (this.month + 1 > 12) {
 				nextDay = 1;
 				nextMonth = 1;
@@ -247,7 +247,7 @@ public class CalendarDate {
 
 
 		System.out.println("\n\n-- First Date --\n");
-		CalendarDate dateOne = new CalendarDate(28, 2, 2000);
+		CalendarDate dateOne = new CalendarDate(28, 2, 2001);
 		System.out.println("The date is " + dateOne);
 		System.out.println("The day of the week is " + dateOne.getWeekDay());
 		System.out.println("The next day is " + dateOne.getNextDayFormatted());
