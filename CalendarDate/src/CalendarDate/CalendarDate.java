@@ -248,9 +248,7 @@ public class CalendarDate {
 		String day = "";
 		String month = "";
 		String year = "";
-
-		System.out.println(args.length);
-
+		
 		for (int i = 0; i < args.length; i++) {
 			if (args[i].equals("-d")) {
 				day = args[i+1];
