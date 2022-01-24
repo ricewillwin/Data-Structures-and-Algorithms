@@ -245,27 +245,37 @@ public class CalendarDate {
 	 */
 	public static void main(String args[]) {
 
+		String day = "";
+		String month = "";
+		String year = "";
 
-		System.out.println("\n\n-- First Date --\n");
-		CalendarDate dateOne = new CalendarDate(28, 2, 2001);
+		System.out.println(args.length);
+
+		for (int i = 0; i < args.length; i++) {
+			if (args[i].equals("-d")) {
+				day = args[i+1];
+			}
+			if (args[i].equals("-m")) {
+				month = args[i+1];
+			}
+			if (args[i].equals("-y")) {
+				year = args[i+1];
+			}
+		}
+
+		CalendarDate dateOne = new CalendarDate(1,1,1);
+
+		try {
+			dateOne = new CalendarDate(Integer.parseInt(day), Integer.parseInt(month), Integer.parseInt(year));
+		}
+		catch (Exception e) {
+			System.out.println("Error: " + e);
+		}
+
 		System.out.println("The date is " + dateOne);
 		System.out.println("The day of the week is " + dateOne.getWeekDay());
 		System.out.println("The next day is " + dateOne.getNextDayFormatted());
 		System.out.println("The last day was " + dateOne.getLastDayFormatted());
-
-		System.out.println("\n\n\n-- Second Date --\n");
-		CalendarDate dateTwo = new CalendarDate(32, 2, 2020);
-		System.out.println("The date is " + dateTwo);
-		System.out.println("The day of the week is " + dateTwo.getWeekDay());
-		System.out.println("The next day is " + dateTwo.getNextDayFormatted());
-		System.out.println("The last day was " + dateTwo.getLastDayFormatted());
-
-		System.out.println("\n\n\n-- Third Date --\n");
-		CalendarDate dateThree = new CalendarDate(10, 9, 2021);
-		System.out.println("The date is " + dateThree);
-		System.out.println("The day of the week is " + dateThree.getWeekDay());
-		System.out.println("The next day is " + dateThree.getNextDayFormatted());
-		System.out.println("The last day was " + dateThree.getLastDayFormatted());
 
 	}
 
