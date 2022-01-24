@@ -272,8 +272,7 @@ public class CalendarDate {
 			System.out.println("Error: " + e);
 		}
 
-		System.out.println("The date is " + dateOne);
-		System.out.println("The day of the week is " + dateOne.getWeekDay());
+		System.out.println("The date is " + dateOne.getWeekDay() + " " + dateOne);
 		System.out.println("The next day is " + dateOne.getNextDayFormatted());
 		System.out.println("The last day was " + dateOne.getLastDayFormatted());
 
