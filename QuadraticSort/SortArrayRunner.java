@@ -10,16 +10,13 @@ public class SortArrayRunner {
 		int avgComparisons = 0;
 
 		for (int i = 0; i < stats500.length; i++ ) {
-			SortArray array = new SortArray(50000, 2);
+			SortArray array = new SortArray(500, 2);
 			array.sort();
 			stats500[i][0] = array.getSwaps();
-			avgSwaps += array.getSwaps();
+			avgSwaps += array.getSwaps() / stats500.length;
 			stats500[i][1] = array.getComparisons();
-			avgComparisons += array.getComparisons();
-		} 
-
-		avgSwaps /= stats500.length;
-		avgComparisons /= stats500.length;
+			avgComparisons += array.getComparisons() / stats500.length;
+		}
 
 		System.out.println("#\tSwaps\tComparisons");
 		for ( int i = 0; i < stats500.length; i++ ) {
