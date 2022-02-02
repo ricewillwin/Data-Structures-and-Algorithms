@@ -11,6 +11,14 @@ public class CatMouse {
 	private ArrayList<char[]> maze = new ArrayList<char[]>();
 	private int cat;
 
+	/**
+	 * Base Constructor
+	 * <p>
+	 * Gives the user a prompt for the name of the file then creates the maze.
+	 * </p>
+	 * 
+	 * @throws IOException
+	 */
 	public CatMouse() throws IOException {
 
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -50,6 +58,11 @@ public class CatMouse {
 
 	}
 
+	/**
+	 * Constructs a maze from a given file.
+	 * @param filename
+	 * @throws IOException
+	 */
 	public CatMouse(String filename) throws IOException {
 
 		FileReader readFile = new FileReader(filename);
@@ -71,6 +84,10 @@ public class CatMouse {
 
 	}
 
+	/**
+	 * Attemps to find the mouse with a given path
+	 * @return The maze with the path
+	 */
 	public String findMouseRunner() {
 		boolean found = findMouse(0, this.cat);
 
@@ -78,7 +95,13 @@ public class CatMouse {
 		return this.toString();
 	}
 
-	public boolean findMouse(int x, int y) {
+	/**
+	 * Finds the mouse from the cats starting location
+	 * @param x
+	 * @param y
+	 * @return If the mouse was found
+	 */
+	private boolean findMouse(int x, int y) {
 
 		char tail = '0';
 
