@@ -7,6 +7,35 @@ public class CatMouse {
 	private ArrayList<char[]> maze = new ArrayList<char[]>();
 	private int[] cat;
 
+	public CatMouse() throws IOException {
+
+		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
+		System.out.print("What is the name of the Maze?\n>>>  ");
+		String filename = input.readLine();
+
+		FileReader readFile = new FileReader(filename);
+		BufferedReader inFile = new BufferedReader(readFile);
+		String inputString = inFile.readLine();
+		int row = 0;
+		while (inputString != null){
+
+			System.out.println(inputString);
+			for (int y = 0; y < inputString.length(); y++) {
+				if (inputString.charAt(y) == 'C') {
+					this.cat = new int[] {row, y};
+				}
+			}
+			maze.add(inputString.toCharArray());
+
+			inputString = inFile.readLine();
+			row++;
+		}
+
+		inFile.close();
+
+	}
+
 	public CatMouse(String filename) throws IOException {
 
 		FileReader readFile = new FileReader(filename);
@@ -31,22 +60,24 @@ public class CatMouse {
 	}
 
 	public String findMouseRunner() {
-		findMouse(this.cat[0], this.cat[1]);
+		boolean found = findMouse(this.cat[0], this.cat[1]);
 
+		System.out.println("The Cat "  + (found == true ? "found" : "didn't find") + " the mouse in this " + maze.size() + "x" + maze.get(0).length + " maze as follows:");
 		return this.toString();
 	}
 
 	public boolean findMouse(int x, int y) {
 
-		char tail = '@';
+		char tail = '0';
+
+		if (x < 0 || x >= maze.size() || y < 0 || y >= maze.get(x).length) {
+			return false;
+		}
 
 		if (maze.get(x)[y] == 'M') {
 			return true;
 		}
-		else if (maze.get(x)[y] == tail) {
-			return false;
-		}
-		else if (maze.get(x)[y] == '#') {
+		else if (maze.get(x)[y] == tail || maze.get(x)[y] == '#') {
 			return false;
 		}
 
@@ -54,8 +85,10 @@ public class CatMouse {
 			maze.get(x)[y] = tail;
 		}
 
-		if (!(findMouse(x+1, y) || findMouse(x, y+1) || findMouse(x-1, y) || findMouse(x, y-1))) {
-			maze.get(x)[y] = ' ';
+		if (!(findMouse(x-1, y) || findMouse(x, y+1) || findMouse(x+1, y) ||  findMouse(x, y-1))) {
+			if (maze.get(x)[y] != 'C') {
+				maze.get(x)[y] = ' ';
+			}
 		}
 		else {
 			return true;
@@ -79,7 +112,7 @@ public class CatMouse {
 	}
 
 	public static void main(String[] args) throws IOException {
-		CatMouse mazenew = new CatMouse("Data-Structures-and-Algoritms/CatAndMouse/maze.txt");
+		CatMouse mazenew = new CatMouse();
 		System.out.println(mazenew);
 		System.out.println(mazenew.findMouseRunner());
 	}
