@@ -2,7 +2,9 @@ import java.io.*;
 import java.util.ArrayList;
 
 /**
- * Class that describes the
+ * Class that describes a maze in which a cat finds a mouse
+ * 
+ * @author William Rice <william@wrice.dev>
  */
 public class CatMouse {
 	
