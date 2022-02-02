@@ -37,7 +37,7 @@ public class CatMouse {
 	}
 
 	public static void main(String[] args) throws IOException {
-		CatMouse mazenew = new CatMouse("maze.txt");
+		CatMouse mazenew = new CatMouse("Data-Structures-and-Algoritms/CatAndMouse/maze.txt");
 		System.out.println(mazenew);
 	}
 
