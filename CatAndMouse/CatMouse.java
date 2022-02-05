@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Class that describes a maze in which a cat finds a mouse
@@ -91,8 +92,19 @@ public class CatMouse {
 	public String findMouseRunner() {
 		boolean found = findMouse(0, this.cat);
 
-		System.out.println("The Cat "  + (found == true ? "found" : "didn't find") + " the mouse in this " + this.maze.size() + "x" + this.maze.get(0).length + " maze as follows:");
-		return this.toString();
+		return ("The Cat "  + (found == true ? "found" : "didn't find") + " the mouse in this " + this.maze.size() + 
+						"x" + this.maze.get(0).length + " maze" + (found == true ? " as follows:" : ".") + (found == true ? "\n" + this.toString() : ""));
+	}
+
+	/**
+	 * Attemps to find the mouse with a given path + fancy ui
+	 * @return The maze with the path
+	 */
+	public String findMouseUIRunner() throws Exception {
+		boolean found = findMouseCool(0, this.cat);
+
+		return ("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe Cat "  + (found == true ? "found" : "didn't find") + " the mouse in this " + this.maze.size() + 
+						"x" + this.maze.get(0).length + " maze" + (found == true ? " as follows:" : ".") + (found == true ? "\n" + this.toString() : ""));
 	}
 
 	/**
@@ -133,6 +145,47 @@ public class CatMouse {
 
 	}
 
+	/**
+	 * Finds the mouse from the cats starting location with a cool ui.
+	 * @param x
+	 * @param y
+	 * @return If the mouse was found
+	 */
+	private boolean findMouseCool(int x, int y) throws Exception {
+
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSearching...\n" + toString());
+		TimeUnit.MILLISECONDS.sleep(25);
+
+		char tail = '0';
+
+		if (x < 0 || x >= this.maze.size() || y < 0 || y >= this.maze.get(x).length) {
+			return false;
+		}
+
+		if (this.maze.get(x)[y] == 'M') {
+			return true;
+		}
+		else if (this.maze.get(x)[y] == tail || this.maze.get(x)[y] == '#') {
+			return false;
+		}
+
+		if (this.maze.get(x)[y] != 'C') {
+			this.maze.get(x)[y] = tail;
+		}
+
+		if (!(findMouseCool(x-1, y) || findMouseCool(x, y+1) || findMouseCool(x+1, y) ||  findMouseCool(x, y-1))) {
+			if (this.maze.get(x)[y] != 'C') {
+				this.maze.get(x)[y] = ' ';
+			}
+		}
+		else {
+			return true;
+		}
+
+		return false;
+
+	}
+
 	public String toString() {
 
 		String mazeString = "";
@@ -146,10 +199,11 @@ public class CatMouse {
 		return mazeString;
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
+		// Data-Structures-and-Algoritms/CatAndMouse/maze101.txt
 		CatMouse mazenew = new CatMouse();
 		System.out.println(mazenew);
-		System.out.println(mazenew.findMouseRunner());
+		System.out.println(mazenew.findMouseUIRunner());
 	}
 
 }
