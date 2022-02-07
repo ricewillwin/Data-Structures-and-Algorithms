@@ -185,6 +185,7 @@ public class CatMouse {
 		}
 
 		if (!(findMouseUI(x-1, y, r) || findMouseUI(x, y+1, r) || findMouseUI(x+1, y, r) ||  findMouseUI(x, y-1, r))) {
+		// if (!(findMouseUI(x, y+1, r) || findMouseUI(x-1, y, r) || findMouseUI(x, y-1, r) ||  findMouseUI(x+1, y, r))) {
 			if (this.maze.get(x)[y] != 'C') {
 				this.maze.get(x)[y] = ' ';
 			}
