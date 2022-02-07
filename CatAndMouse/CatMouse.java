@@ -101,7 +101,7 @@ public class CatMouse {
 	 * @return The maze with the path
 	 */
 	public String findMouseUIRunner() throws Exception {
-		boolean found = findMouseCool(0, this.cat);
+		boolean found = findMouseUI(0, this.cat, 0);
 
 		return ("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe Cat "  + (found == true ? "found" : "didn't find") + " the mouse in this " + this.maze.size() + 
 						"x" + this.maze.get(0).length + " maze" + (found == true ? " as follows:" : ".") + (found == true ? "\n" + this.toString() : ""));
@@ -146,15 +146,26 @@ public class CatMouse {
 	}
 
 	/**
-	 * Finds the mouse from the cats starting location with a cool ui.
+	 * Finds the mouse from the cats starting location with an ui.
 	 * @param x
 	 * @param y
 	 * @return If the mouse was found
 	 */
-	private boolean findMouseCool(int x, int y) throws Exception {
+	private boolean findMouseUI(int x, int y, int r) throws Exception {
 
-		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSearching...\n" + toString());
-		TimeUnit.MILLISECONDS.sleep(25);
+	int frames = 5;
+		
+	// System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSearching...\n" + toString());
+	System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSearching" + ((r <= frames) ? "" : (r <= 2*frames) ? "." : (r <= 3*frames) ? ".." : "...")  + "\n" + toString());
+	if (r > 4*frames) {
+		r = 0;
+	}
+	else {
+		r++;
+	}
+
+	TimeUnit.MILLISECONDS.sleep(25);
+
 
 		char tail = '0';
 
@@ -173,7 +184,7 @@ public class CatMouse {
 			this.maze.get(x)[y] = tail;
 		}
 
-		if (!(findMouseCool(x-1, y) || findMouseCool(x, y+1) || findMouseCool(x+1, y) ||  findMouseCool(x, y-1))) {
+		if (!(findMouseUI(x-1, y, r) || findMouseUI(x, y+1, r) || findMouseUI(x+1, y, r) ||  findMouseUI(x, y-1, r))) {
 			if (this.maze.get(x)[y] != 'C') {
 				this.maze.get(x)[y] = ' ';
 			}
