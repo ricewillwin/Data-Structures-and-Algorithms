@@ -214,7 +214,7 @@ public class CatMouse {
 		// Data-Structures-and-Algoritms/CatAndMouse/maze101.txt
 		CatMouse mazenew = new CatMouse();
 		System.out.println(mazenew);
-		System.out.println(mazenew.findMouseUIRunner());
+		System.out.println(mazenew.findMouseRunner());
 	}
 
 }
