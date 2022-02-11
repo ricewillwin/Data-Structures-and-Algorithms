@@ -63,7 +63,7 @@ public class qSortArray extends SortArray {
 			unsortedArray[j] = k;
 
 			try {
-				TimeUnit.MILLISECONDS.sleep(15);
+				TimeUnit.MILLISECONDS.sleep(25);
 				this.quickSortUI();
 			}
 			catch (Exception e) {}
