@@ -62,6 +62,12 @@ public class qSortArray extends SortArray {
 			unsortedArray[i] = unsortedArray[j];
 			unsortedArray[j] = k;
 
+			try {
+				TimeUnit.MILLISECONDS.sleep(15);
+				this.quickSortUI();
+			}
+			catch (Exception e) {}
+
 			while(j > i) {
 				if (unsortedArray[j] > pivot) {
 					j--;
@@ -86,12 +92,6 @@ public class qSortArray extends SortArray {
 		int k = unsortedArray[low];
 		unsortedArray[low] = unsortedArray[split];
 		unsortedArray[split] = k;
-
-		try {
-			TimeUnit.MILLISECONDS.sleep(25);
-			this.quickSortUI();
-		}
-		catch (Exception e) {}
 
 		unsortedArray = qSort(unsortedArray, low, split-1);
 		unsortedArray = qSort(unsortedArray, split+1, high);
@@ -147,12 +147,17 @@ public class qSortArray extends SortArray {
 
 		// System.out.println( "\n\n\n\n\n\n" + errornum + "\n"+ errornum * 100 / 100);
 
+		int errornum = 0;
 		qSortArray array = new qSortArray(125, 2);
 		for (int i = 0; i < 29; i++) {
 			System.out.print("\n");
 		}
 		array.sort();
-	}
 
+		for (int i = 0; i < array.getArray().length -1; i++) {
+			if (array.getArray()[i] > array.getArray()[i+1]) {errornum++;}
+		}
+		System.out.println(errornum);
+	}
 
 }
