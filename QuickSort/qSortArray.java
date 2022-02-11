@@ -10,6 +10,7 @@ public class qSortArray extends SortArray {
 
 	public String sort() {
 		this.setArray(qSort(this.getArray(), 0, this.getArray().length-1));
+		this.quickSortUI(-1, -1);
 
 		return (this.toString() + " Items\nSwaps:\t\t" + this.getSwaps() + "\nComparisons:\t" + this.getComparisons() + "\n");
 	}
@@ -61,19 +62,19 @@ public class qSortArray extends SortArray {
 			int k = unsortedArray[i];
 			unsortedArray[i] = unsortedArray[j];
 			unsortedArray[j] = k;
-
-			try {
-				TimeUnit.MILLISECONDS.sleep(25);
-				this.quickSortUI();
-			}
-			catch (Exception e) {}
-
+			
+						try {
+							TimeUnit.MILLISECONDS.sleep(75);
+							this.quickSortUI(i, j);
+						}
+						catch (Exception e) {}
+			
 			while(j > i) {
 				if (unsortedArray[j] > pivot) {
 					j--;
 					continue;
 				}
-
+				
 				k = unsortedArray[i];
 				unsortedArray[i] = unsortedArray[j];
 				unsortedArray[j] = k;
@@ -104,7 +105,7 @@ public class qSortArray extends SortArray {
 		return "\033[" + lines + "F";
 	}
 
-	public void quickSortUI() {
+	public void quickSortUI(int indexFront, int indexBack) {
 		int modifer = 4;
 		int maxheight = 30 - 1;
 		int height = this.getArray().length-1 < maxheight ? this.getArray().length-1 : maxheight;
@@ -113,10 +114,26 @@ public class qSortArray extends SortArray {
 			for (int j = 0; j < this.getArray().length; j++) {
 				if ((this.getArray()[j] / modifer) > i) {
 					if (i == maxheight && (this.getArray()[j] / modifer) > maxheight + 1) {
-						output += "&";
+						if (j == indexFront) {
+							output += "\033[1;31m&\033[0;0m";
+						}
+						else if (j == indexBack) {
+							output += "\033[1;35m&\033[0;0m";
+						}
+						else {
+							output += "&";
+						}
 					}
 					else {
-						output += "#";
+						if (j == indexFront) {
+							output += "\033[1;91m#\033[0;0m";
+						}
+						else if (j == indexBack) {
+							output += "\033[1;35m#\033[0;0m";
+						}
+						else {
+							output += "#";
+						}
 					}
 				}
 				else {
@@ -125,6 +142,10 @@ public class qSortArray extends SortArray {
 			}
 			output += "\n";
 		}
+		for (int i = 0; i < this.getArray().length - 1; i++) {
+			output += i%10 == 0 ? (i / 10 > 0) ? ((i / 10 > 9) ? ("\033[2D" + i) : ("\033[1D" + i)) : (i) : " ";
+		}
+		
 
 		System.out.print(output);
 	}
@@ -152,12 +173,10 @@ public class qSortArray extends SortArray {
 		for (int i = 0; i < 29; i++) {
 			System.out.print("\n");
 		}
+		System.out.print("\033[?25l");
 		array.sort();
+		System.out.print("\033[?25h");
 
-		for (int i = 0; i < array.getArray().length -1; i++) {
-			if (array.getArray()[i] > array.getArray()[i+1]) {errornum++;}
-		}
-		System.out.println(errornum);
 	}
 
 }
