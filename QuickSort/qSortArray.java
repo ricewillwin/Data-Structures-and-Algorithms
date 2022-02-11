@@ -106,9 +106,9 @@ public class qSortArray extends SortArray {
 	}
 
 	public void quickSortUI(int indexFront, int indexBack) {
-		int modifer = 4;
 		int maxheight = 30 - 1;
 		int height = this.getArray().length-1 < maxheight ? this.getArray().length-1 : maxheight;
+		int modifer = this.getArray().length/height;
 		String output = moveUp(height + 1);
 		for (int i = height; i >= 0; i--) {
 			for (int j = 0; j < this.getArray().length; j++) {
@@ -168,8 +168,7 @@ public class qSortArray extends SortArray {
 
 		// System.out.println( "\n\n\n\n\n\n" + errornum + "\n"+ errornum * 100 / 100);
 
-		int errornum = 0;
-		qSortArray array = new qSortArray(125, 2);
+		qSortArray array = new qSortArray(126, 2);
 		for (int i = 0; i < 29; i++) {
 			System.out.print("\n");
 		}
