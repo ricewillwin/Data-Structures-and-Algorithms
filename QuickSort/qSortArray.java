@@ -10,7 +10,7 @@ public class qSortArray extends SortArray {
 
 	public String sort() {
 		this.setArray(qSort(this.getArray(), 0, this.getArray().length-1));
-		this.quickSortUI(-1, -1);
+		this.quickSortUI(-1, -1, this.getArray().length);
 
 		return (this.toString() + " Items\nSwaps:\t\t" + this.getSwaps() + "\nComparisons:\t" + this.getComparisons() + "\n");
 	}
@@ -65,7 +65,7 @@ public class qSortArray extends SortArray {
 			
 						try {
 							TimeUnit.MILLISECONDS.sleep(75);
-							this.quickSortUI(i, j);
+							this.quickSortUI(i, j, 0);
 						}
 						catch (Exception e) {}
 			
@@ -105,7 +105,7 @@ public class qSortArray extends SortArray {
 		return "\033[" + lines + "F";
 	}
 
-	public void quickSortUI(int indexFront, int indexBack) {
+	public void quickSortUI(int indexFront, int indexBack, int sorted) {
 		int maxheight = 30 - 1;
 		int height = this.getArray().length-1 < maxheight ? this.getArray().length-1 : maxheight;
 		int modifer = this.getArray().length/height;
@@ -139,6 +139,19 @@ public class qSortArray extends SortArray {
 				else {
 					output += " ";
 				}
+
+				if ((i <= height - 5 && i >= height - 11) && (j >= 5 && j <= 30)) {
+					if (i == height - 5 || i == height - 11 || j == 5 || j == 6 || j == 29 || j == 30) {
+						output += "\033[1D#";
+					}
+					else if (i == height - 7 && j == 19) {
+						output += "\033[10DSorted " + (sorted <= 99 ? sorted / 10 > 0 ? sorted + " " : sorted + "  " : ">99") ;
+					}
+					else {
+						output += "\033[1D ";
+					}
+				}
+
 			}
 			output += "\n";
 		}
@@ -168,7 +181,7 @@ public class qSortArray extends SortArray {
 
 		// System.out.println( "\n\n\n\n\n\n" + errornum + "\n"+ errornum * 100 / 100);
 
-		qSortArray array = new qSortArray(126, 2);
+		qSortArray array = new qSortArray(175, 2);
 		for (int i = 0; i < 29; i++) {
 			System.out.print("\n");
 		}
