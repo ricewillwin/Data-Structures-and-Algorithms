@@ -1,230 +1,153 @@
 package QuickSort;
-
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
+import java.lang.reflect.Array;
+import java.security.PrivilegedAction;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
+import QuadraticSort.SortArray;
 
-/**
- * 
- * Creates an integer Array then sorts that array
- * 
- * @author 	William Rice <william@wrice.dev>
- * 
- */
-public class qSortArray {
-	
-	private int[] intArray;
-	private int swaps;
-	private int comparisons;
+public class qSortArray extends SortArray {
 
-
-
-	// ####################
-	// ##                ##
-	// ##  Constructors  ##
-	// ##                ##
-	// ####################
-
-	/**
-	 * Creates an array of length 10 in ascending order
-	 */
-	public qSortArray() {
-		this.intArray = genAscendingArray(10);
+	public qSortArray(int len, int dir) {
+		super(len, dir);
 	}
 
-	/**
-	 * Creates an array of a given length in ascending order
-	 * 
-	 * @param arrayLength The length of the array
-	 */
-	public qSortArray(int arrayLength) {
-		this.intArray = genAscendingArray(arrayLength);
+	public String sort() {
+		System.out.println("\n" + super.toString());
+		super.setArray(qSort(super.getArray(), 0, super.getArray().length-1));
+		System.out.println(super.toString());
+
+
+		return (super.toString() + " Items\nSwaps:\t\t" + super.getSwaps() + "\nComparisons:\t" + super.getComparisons() + "\n");
 	}
 
-	/**
-	 * Creates an array of a given length in a given order
-	 * 
-	 * @param arrayLength The length of the array
-	 * @param direction The direction the array is filled (0 -> Ascending, 1 -> Descending, 2 -> Random)
-	 */
-	public qSortArray(int arrayLength, int direction) {
-		
-		if (direction == 0) {
-			this.intArray = genAscendingArray(arrayLength);
+	private int[] qSort(int[] unsortedArray, int low, int high) {
+
+		if (low >= high) {
+			return unsortedArray;
 		}
-		else if (direction == 1) {
-			this.intArray = genDescendingArray(arrayLength);
+
+		int first = unsortedArray[low];
+		int middle = unsortedArray[(high)/2];
+		int last = unsortedArray[high];
+		int pivot;
+		
+		if ((first > middle && first > last) || (first < middle && first < last)) {
+			if((middle < last && middle < first) || (middle > last && middle > first)) {
+				// Last is the median
+				pivot = last;
+
+				int k = unsortedArray[low];
+				unsortedArray[low] = pivot;
+				unsortedArray[high] = k;
+			}
+			else {
+				// Middle is the median
+				pivot = middle;
+
+				int k = unsortedArray[low];
+				unsortedArray[low] = pivot;
+				unsortedArray[(high)/2] = k;
+			}
 		}
 		else {
-			this.intArray = genRandomArray(arrayLength);
+			// First is the medians
+			pivot = first;
+
 		}
 
-	}
 
-
-
-	// #####################
-	// ##                 ##
-	// ##  Create Arrays  ##
-	// ##                 ##
-	// #####################
-
-	/**
-	 * Generates an array of a given length in ascending order
-	 * 
-	 * @param length The length of the array
-	 * @return Array of Integers
-	 */
-	public int[] genAscendingArray(int length) {
-		int[] newArray = new int[length];
-
-		for (int i = 0; i < length; i++) {
-			newArray[i] = i;
-		}
-
-		return newArray;
-	}
-
-	/**
-	 * Generates an array of a given length in descending order
-	 * 
-	 * @param length The length of the array
-	 * @return Array of Inegers
-	 */
-	public int[] genDescendingArray(int length) {
-		int[] newArray = new int[length];
-
-		for (int i = 0; i < length; i++) {
-			newArray[i] = length - 1 - i;
-		}
-
-		return newArray;
-	}
-
-	/**
-	 * Generates an array of a given length in random order
-	 * 
-	 * @param length The length of the array
-	 * @return Array of Integers
-	 */
-	public int[] genRandomArray(int length) {
-		int[] newArray = new int[length];
-
-		for (int i = 0; i < length; i++) {
-			newArray[i] = (int) (Math.random()*length);
-		}
-
-		return newArray;
-	}
-
-
-
-	// #########################
-	// ##                     ##
-	// ##  Getters / Setters  ##
-	// ##                     ##
-	// #########################
-
-	/**
-	 * Returns Swaps
-	 * @return Swaps
-	 */
-	public int getSwaps() {
-		return this.swaps;
-	}
-
-	/**
-	 * Sets Swaps
-	 * @param swaps Swaps
-	 */
-	public void setSwaps(int swaps) {
-		this.swaps = swaps;
-	}
-
-	/**
-	 * Gets Comparisons
-	 * @return Comparisons
-	 */
-	public int getComparisons() {
-		return this.comparisons;
-	}
-
-	/**
-	 * Sets Comparisons
-	 * @param comparisons Comparisons
-	 */
-	public void setComparisons(int comparisons) {
-		this.comparisons = comparisons;
-	}
-
-	/**
-	 * Gets Array
-	 * @return Integer Array
-	 */
-	public int[] getArray() {
-		return this.intArray;
-	}
-
-	/**
-	 * Sets Array
-	 * @param intArray Integer Array
-	 */
-	public void setArray(int[] intArray) {
-		this.intArray = intArray;
-	} 
-
-	/**
-	 * Returns the String Form of the Array
-	 */
-	public String toString() {
-		return Arrays.toString(this.intArray);
-	}
-
-
-
-	// #########################
-	// ##                     ##
-	// ##  Sorting Algorthim  ##
-	// ##                     ##
-	// #########################
-
-	private String moveUp(int lines) {
-		return "\033[" + lines + "F";
-	}
-
-	public void quickSortUI() {
-		int maxheight = 20 - 1;
-		int height = this.intArray.length-1 < maxheight ? this.intArray.length-1 : maxheight;
-		String output = moveUp(height);
-		for (int i = height; i >= 0; i--) {
-			for (int j = 0; j < this.intArray.length; j++) {
-				if (this.intArray[j] > i) {
-					if (i == maxheight && this.intArray[j] > maxheight + 1) {
-						output += "&";
-					}
-					else {
-						output += "#";
-					}
-				}
-				else {
-					output += " ";
-				}
+		int i = low;
+		int j = high;
+		while(i < j) {
+			if(unsortedArray[i] <= pivot) {
+				i++;
+				continue;
 			}
-			output += "\n";
+
+			int k = unsortedArray[i];
+			unsortedArray[i] = unsortedArray[j];
+			unsortedArray[j] = k;
+
+			while(j > i) {
+				if (unsortedArray[j] > pivot) {
+					j--;
+					continue;
+				}
+
+				k = unsortedArray[i];
+				unsortedArray[i] = unsortedArray[j];
+				unsortedArray[j] = k;
+				break;
+
+			}
+			
 		}
 
-		System.out.print(output);
+		int split = i;
+
+		while (unsortedArray[split] > pivot) {
+			split--;
+		}
+
+		int k = unsortedArray[low];
+		unsortedArray[low] = unsortedArray[split];
+		unsortedArray[split] = k;
+
+		// System.out.println(pivot + "\n");
+		unsortedArray = qSort(unsortedArray, low, split-1);
+		unsortedArray = qSort(unsortedArray, split+1, high);
+
+		return unsortedArray;
+
 	}
 
-	
+	// private String moveUp(int lines) {
+	// 	return "\033[" + lines + "F";
+	// }
+
+	// public void quickSortUI() {
+	// 	int maxheight = 20 - 1;
+	// 	int height = this.intArray.length-1 < maxheight ? this.intArray.length-1 : maxheight;
+	// 	String output = moveUp(height);
+	// 	for (int i = height; i >= 0; i--) {
+	// 		for (int j = 0; j < this.intArray.length; j++) {
+	// 			if (this.intArray[j] > i) {
+	// 				if (i == maxheight && this.intArray[j] > maxheight + 1) {
+	// 					output += "&";
+	// 				}
+	// 				else {
+	// 					output += "#";
+	// 				}
+	// 			}
+	// 			else {
+	// 				output += " ";
+	// 			}
+	// 		}
+	// 		output += "\n";
+	// 	}
+
+	// 	System.out.print(output);
+	// }
 
 	public static void main(String[] args) {
 
-		qSortArray stuff = new qSortArray(30, 2);
-		System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-		stuff.quickSortUI();
-		System.out.println(stuff.toString());
+		int errornum = 0;
+		for (int i = 0; i < 100; i++) {
+
+			qSortArray stuff = new qSortArray(40, 2);
+			stuff.sort();
+			for (int k = 0; k < stuff.getArray().length - 1; k++) {
+				if (stuff.getArray()[k] > stuff.getArray()[k+1]) {
+					// System.out.println("Error " + stuff.getArray()[k]);
+					errornum++;
+				}
+			}
+
+		}
+
+		System.out.println( "\n\n\n\n\n\n" + errornum + "\n"+ errornum * 100 / 100);
 
 	}
+
 
 }
