@@ -9,8 +9,9 @@ public class qSortArray extends SortArray {
 	}
 
 	public String sort() {
-		this.setArray(qSort(this.getArray(), 0, this.getArray().length-1));
 		this.quickSortUI(-1, -1, this.getArray().length);
+		this.setArray(qSort(this.getArray(), 0, this.getArray().length-1));
+		// this.quickSortUI(-1, -1, this.getArray().length);
 
 		return (this.toString() + " Items\nSwaps:\t\t" + this.getSwaps() + "\nComparisons:\t" + this.getComparisons() + "\n");
 	}
@@ -34,14 +35,18 @@ public class qSortArray extends SortArray {
 				int k = unsortedArray[low];
 				unsortedArray[low] = pivot;
 				unsortedArray[high] = k;
+				swapUI(unsortedArray, low, high);
+
 			}
 			else {
 				// Middle is the median
 				pivot = middle;
-
+				
 				int k = unsortedArray[low];
 				unsortedArray[low] = pivot;
 				unsortedArray[(high)/2] = k;
+				swapUI(unsortedArray, low, (high/2));
+
 			}
 		}
 		else {
@@ -49,26 +54,18 @@ public class qSortArray extends SortArray {
 			pivot = first;
 
 		}
-
 		
 		int i = low;
 		int j = high;
+		
 		while(i < j) {
-
-			try {
-				// TimeUnit.MILLISECONDS.sleep(15);
-				this.quickSortUI(i, j, i);
-			}
-			catch (Exception e) {}
-
+			
 			if(unsortedArray[i] <= pivot) {
 				i++;
 				continue;
 			}
 			
-			int k = unsortedArray[i];
-			unsortedArray[i] = unsortedArray[j];
-			unsortedArray[j] = k;
+			unsortedArray = swapArray(unsortedArray, i, j);
 			
 			while(j > i) {
 				if (unsortedArray[j] > pivot) {
@@ -76,9 +73,7 @@ public class qSortArray extends SortArray {
 					continue;
 				}
 				
-				k = unsortedArray[i];
-				unsortedArray[i] = unsortedArray[j];
-				unsortedArray[j] = k;
+				unsortedArray = swapArray(unsortedArray, i, j);
 				break;
 				
 			}
@@ -91,9 +86,7 @@ public class qSortArray extends SortArray {
 			split--;
 		}
 
-		int k = unsortedArray[low];
-		unsortedArray[low] = unsortedArray[split];
-		unsortedArray[split] = k;
+		unsortedArray = swapArray(unsortedArray, low, split);
 		
 		unsortedArray = qSort(unsortedArray, low, split-1);
 		unsortedArray = qSort(unsortedArray, split+1, high);
@@ -102,65 +95,61 @@ public class qSortArray extends SortArray {
 
 	}
 
+	private int[] swapArray(int[] array, int indexOne, int indexTwo) {
+		int temp = array[indexOne];
+		array[indexOne] = array[indexTwo];
+		array[indexTwo] = temp;
+		swapUI(array, indexOne, indexTwo);
+		return array;
+	}
+
+	
 	private String moveUp(int lines) {
 		return "\033[" + lines + "F";
+	}
+
+	private String drawIndex(int[] array, int height, int modifer, int index) {
+		String out = moveUp(height+1) + "\033[" + index + "G";
+		for (int i = height; i >= 0; i--) {
+			if (array[index] / modifer > i) {
+				out += "#\033[1B\033[1D";
+			}
+			else {
+				out += " \033[1B\033[1D";
+			}
+		}
+
+		return out;
+	}
+	
+	private void swapUI(int[] array, int indexOne, int indexTwo) {
+		int maxheight = 30 - 1;
+		int height = array.length-1 < maxheight ? array.length-1 : maxheight;
+		int modifer = array.length/height;
+
+		
+		String out = drawIndex(array, height, modifer, indexOne);
+		out += drawIndex(array, height, modifer, indexTwo);
+
+		try {TimeUnit.MILLISECONDS.sleep(15);} catch (Exception e) {}
+		
+		System.out.print(out);
 	}
 
 	public void quickSortUI(int indexFront, int indexBack, int sorted) {
 		int maxheight = 30 - 1;
 		int height = this.getArray().length-1 < maxheight ? this.getArray().length-1 : maxheight;
 		int modifer = this.getArray().length/height;
-		String output = moveUp(height + 1);
-		for (int i = height; i >= 0; i--) {
-			for (int j = 0; j < this.getArray().length; j++) {
-				if ((this.getArray()[j] / modifer) > i) {
-					if (i == maxheight && (this.getArray()[j] / modifer) > maxheight + 1) {
-						if (j == indexFront) {
-							output += "\033[1;31m&\033[0;0m";
-						}
-						else if (j == indexBack) {
-							output += "\033[1;35m&\033[0;0m";
-						}
-						else {
-							output += "&";
-						}
-					}
-					else {
-						if (j == indexFront) {
-							output += "\033[1;91m#\033[0;0m";
-						}
-						else if (j == indexBack) {
-							output += "\033[1;35m#\033[0;0m";
-						}
-						else {
-							output += "#";
-						}
-					}
-				}
-				else {
-					output += " ";
-				}
-
-				if ((i <= height - 5 && i >= height - 9) && (j >= 5 && j <= 30)) {
-					if (i == height - 5 || i == height - 9 || j == 5 || j == 6 || j == 29 || j == 30) {
-						output += "\033[1D#";
-					}
-					else if (i == height - 7 && j == 21) {
-						output += "\033[12DPosition " + (sorted <= 999 ? sorted / 10 > 0 ? sorted / 100 > 0 ? sorted : sorted + " " : sorted + "  " : ">99") ;
-					}
-					else {
-						output += "\033[1D ";
-					}
-				}
-
-			}
-			output += "\n";
+		String output = "";
+		for (int j = 0; j < this.getArray().length; j++) {
+			output += drawIndex(this.getArray(), height, modifer, j);
 		}
+		output += "\033[0G";
 		for (int i = 0; i < this.getArray().length - 1; i++) {
 			output += i%10 == 0 ? (i / 10 > 0) ? ((i / 10 > 9) ? ("\033[2D" + i) : ("\033[1D" + i)) : (i) : " ";
 		}
 		
-
+		
 		System.out.print(output);
 	}
 
