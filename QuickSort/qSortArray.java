@@ -50,24 +50,25 @@ public class qSortArray extends SortArray {
 
 		}
 
-
+		
 		int i = low;
 		int j = high;
 		while(i < j) {
+
+			try {
+				// TimeUnit.MILLISECONDS.sleep(15);
+				this.quickSortUI(i, j, i);
+			}
+			catch (Exception e) {}
+
 			if(unsortedArray[i] <= pivot) {
 				i++;
 				continue;
 			}
-
+			
 			int k = unsortedArray[i];
 			unsortedArray[i] = unsortedArray[j];
 			unsortedArray[j] = k;
-			
-						try {
-							TimeUnit.MILLISECONDS.sleep(75);
-							this.quickSortUI(i, j, 0);
-						}
-						catch (Exception e) {}
 			
 			while(j > i) {
 				if (unsortedArray[j] > pivot) {
@@ -79,13 +80,13 @@ public class qSortArray extends SortArray {
 				unsortedArray[i] = unsortedArray[j];
 				unsortedArray[j] = k;
 				break;
-
+				
 			}
 			
 		}
-
+		
 		int split = i;
-
+		
 		while (unsortedArray[split] > pivot) {
 			split--;
 		}
@@ -93,7 +94,7 @@ public class qSortArray extends SortArray {
 		int k = unsortedArray[low];
 		unsortedArray[low] = unsortedArray[split];
 		unsortedArray[split] = k;
-
+		
 		unsortedArray = qSort(unsortedArray, low, split-1);
 		unsortedArray = qSort(unsortedArray, split+1, high);
 
@@ -140,12 +141,12 @@ public class qSortArray extends SortArray {
 					output += " ";
 				}
 
-				if ((i <= height - 5 && i >= height - 11) && (j >= 5 && j <= 30)) {
-					if (i == height - 5 || i == height - 11 || j == 5 || j == 6 || j == 29 || j == 30) {
+				if ((i <= height - 5 && i >= height - 9) && (j >= 5 && j <= 30)) {
+					if (i == height - 5 || i == height - 9 || j == 5 || j == 6 || j == 29 || j == 30) {
 						output += "\033[1D#";
 					}
-					else if (i == height - 7 && j == 19) {
-						output += "\033[10DSorted " + (sorted <= 99 ? sorted / 10 > 0 ? sorted + " " : sorted + "  " : ">99") ;
+					else if (i == height - 7 && j == 21) {
+						output += "\033[12DPosition " + (sorted <= 999 ? sorted / 10 > 0 ? sorted / 100 > 0 ? sorted : sorted + " " : sorted + "  " : ">99") ;
 					}
 					else {
 						output += "\033[1D ";
@@ -165,23 +166,7 @@ public class qSortArray extends SortArray {
 
 	public static void main(String[] args) {
 
-		// int errornum = 0;
-		// for (int i = 0; i < 100; i++) {
-
-		// 	qSortArray stuff = new qSortArray(40, 2);
-		// 	stuff.sort();
-		// 	for (int k = 0; k < stuff.getArray().length - 1; k++) {
-		// 		if (stuff.getArray()[k] > stuff.getArray()[k+1]) {
-		// 			// System.out.println("Error " + stuff.getArray()[k]);
-		// 			errornum++;
-		// 		}
-		// 	}
-
-		// }
-
-		// System.out.println( "\n\n\n\n\n\n" + errornum + "\n"+ errornum * 100 / 100);
-
-		qSortArray array = new qSortArray(175, 2);
+		qSortArray array = new qSortArray(176, 2);
 		for (int i = 0; i < 29; i++) {
 			System.out.print("\n");
 		}
