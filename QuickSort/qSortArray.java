@@ -102,7 +102,6 @@ public class qSortArray extends SortArray {
 		swapUI(array, indexOne, indexTwo);
 		return array;
 	}
-
 	
 	private String moveUp(int lines) {
 		return "\033[" + lines + "F";
