@@ -58,6 +58,9 @@ public class SortArray {
 			this.intArray = genRandomArray(arrayLength);
 		}
 
+		this.comparisons = 0;
+		this.swaps = 0;
+
 	}
 
 
