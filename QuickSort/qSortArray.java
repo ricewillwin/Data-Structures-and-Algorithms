@@ -23,7 +23,7 @@ public class qSortArray extends SortArray {
 		}
 
 		int first = unsortedArray[low];
-		int middle = unsortedArray[(high)/2];
+		int middle = unsortedArray[(low+high)/2];
 		int last = unsortedArray[high];
 		int pivot;
 		
@@ -46,7 +46,7 @@ public class qSortArray extends SortArray {
 				
 				int k = unsortedArray[low];
 				unsortedArray[low] = pivot;
-				unsortedArray[(high)/2] = k;
+				unsortedArray[(low+high)/2] = k;
 				this.setSwaps(this.getSwaps() + 1);
 				// swapUI(unsortedArray, low, (high/2));
 
@@ -74,7 +74,7 @@ public class qSortArray extends SortArray {
 			
 			while(j > i) {
 				this.setComparisons(this.getComparisons() + 1);
-				if (unsortedArray[j] > pivot) {
+				if (unsortedArray[j] >= pivot) {
 					j--;
 					continue;
 				}
@@ -176,7 +176,7 @@ public class qSortArray extends SortArray {
 		array = new qSortArray(5000, 0);
 		System.out.println(array.sort());
 		array = new qSortArray(50000, 0);
-		// System.out.println(array.sort());
+		System.out.println(array.sort());
 		array = new qSortArray(500, 1);
 		System.out.println(array.sort());
 		array = new qSortArray(5000, 1);
@@ -193,3 +193,36 @@ public class qSortArray extends SortArray {
 	}
 
 }
+
+/*
+
+500 Items
+Swaps:          1467
+Comparisons:    47560
+
+5000 Items
+Swaps:          14953
+Comparisons:    4226591
+
+500 Items
+Swaps:          1469
+Comparisons:    62319
+
+5000 Items
+Swaps:          14955
+Comparisons:    5780350
+
+500 Items
+Swaps:          1998
+Comparisons:    12493
+
+5000 Items
+Swaps:          27858
+Comparisons:    177205
+
+50000 Items
+Swaps:          356289
+Comparisons:    2389406
+
+
+*/
