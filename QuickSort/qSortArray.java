@@ -108,87 +108,87 @@ public class qSortArray extends SortArray {
 		array[indexOne] = array[indexTwo];
 		array[indexTwo] = temp;
 		this.setSwaps(this.getSwaps() + 1);
-		// swapUI(array, indexOne, indexTwo);
+		swapUI(array, indexOne, indexTwo);
 		return array;
 	}
 	
-	// private String moveUp(int lines) {
-	// 	return "\033[" + lines + "F";
-	// }
+	private String moveUp(int lines) {
+		return "\033[" + lines + "F";
+	}
 
-	// private String drawIndex(int[] array, int height, int modifer, int index) {
-	// 	String out = moveUp(height+1) + "\033[" + index + "G";
-	// 	for (int i = height; i >= 0; i--) {
-	// 		if (array[index] / modifer > i) {
-	// 			out += "#\033[1B\033[1D";
-	// 		}
-	// 		else {
-	// 			out += " \033[1B\033[1D";
-	// 		}
-	// 	}
+	private String drawIndex(int[] array, int height, int modifer, int index) {
+		String out = moveUp(height+1) + "\033[" + index + "G";
+		for (int i = height; i >= 0; i--) {
+			if (array[index] / modifer > i) {
+				out += "#\033[1B\033[1D";
+			}
+			else {
+				out += " \033[1B\033[1D";
+			}
+		}
 
-	// 	return out;
-	// }
+		return out;
+	}
 	
-	// private void swapUI(int[] array, int indexOne, int indexTwo) {
-	// 	int maxheight = 30 - 1;
-	// 	int height = array.length-1 < maxheight ? array.length-1 : maxheight;
-	// 	int modifer = array.length/height;
+	private void swapUI(int[] array, int indexOne, int indexTwo) {
+		int maxheight = 30 - 1;
+		int height = array.length-1 < maxheight ? array.length-1 : maxheight;
+		int modifer = array.length/height;
 
 		
-	// 	String out = drawIndex(array, height, modifer, indexOne);
-	// 	out += drawIndex(array, height, modifer, indexTwo);
+		String out = drawIndex(array, height, modifer, indexOne);
+		out += drawIndex(array, height, modifer, indexTwo);
 
-	// 	try {TimeUnit.MILLISECONDS.sleep(15);} catch (Exception e) {}
+		try {TimeUnit.MILLISECONDS.sleep(15);} catch (Exception e) {}
 		
-	// 	System.out.print(out);
-	// }
+		System.out.print(out);
+	}
 
-	// public void quickSortUI(int indexFront, int indexBack, int sorted) {
-	// 	int maxheight = 30 - 1;
-	// 	int height = this.getArray().length-1 < maxheight ? this.getArray().length-1 : maxheight;
-	// 	int modifer = this.getArray().length/height;
-	// 	String output = "";
-	// 	for (int j = 0; j < this.getArray().length; j++) {
-	// 		output += drawIndex(this.getArray(), height, modifer, j);
-	// 	}
-	// 	output += "\033[0G";
-	// 	for (int i = 0; i < this.getArray().length - 1; i++) {
-	// 		output += i%10 == 0 ? (i / 10 > 0) ? ((i / 10 > 9) ? ("\033[2D" + i) : ("\033[1D" + i)) : (i) : " ";
-	// 	}
+	public void quickSortUI(int indexFront, int indexBack, int sorted) {
+		int maxheight = 30 - 1;
+		int height = this.getArray().length-1 < maxheight ? this.getArray().length-1 : maxheight;
+		int modifer = this.getArray().length/height;
+		String output = "";
+		for (int j = 0; j < this.getArray().length; j++) {
+			output += drawIndex(this.getArray(), height, modifer, j);
+		}
+		output += "\033[0G";
+		for (int i = 0; i < this.getArray().length - 1; i++) {
+			output += i%10 == 0 ? (i / 10 > 0) ? ((i / 10 > 9) ? ("\033[2D" + i) : ("\033[1D" + i)) : (i) : " ";
+		}
 		
 		
-	// 	System.out.print(output);
-	// }
+		System.out.print(output);
+	}
 
 	public static void main(String[] args) {
 
-		// qSortArray array = new qSortArray(176, 2);
-		// for (int i = 0; i < 29; i++) {
-		// 	System.out.print("\n");
-		// }
-		// System.out.print("\033[?25l");
-		// array.sort();
-		// System.out.print("\033[?25h");
+		qSortArray array = new qSortArray(176, 2);
+		for (int i = 0; i < 29; i++) {
+			System.out.print("\n");
+		}
+		System.out.print("\033[?25l");
+		array.sort();
+		System.out.print("\033[?25h");
 
-		qSortArray array = new qSortArray(500, 0);
-		System.out.println(array.sort());
-		array = new qSortArray(5000, 0);
-		System.out.println(array.sort());
-		array = new qSortArray(50000, 0);
-		System.out.println(array.sort());
-		array = new qSortArray(500, 1);
-		System.out.println(array.sort());
-		array = new qSortArray(5000, 1);
-		System.out.println(array.sort());
-		array = new qSortArray(50000, 1);
-		System.out.println(array.sort());
-		array = new qSortArray(500, 2);
-		System.out.println(array.sort());
-		array = new qSortArray(5000, 2);
-		System.out.println(array.sort());
-		array = new qSortArray(50000, 2);
-		System.out.println(array.sort());
+		// qSortArray array = new qSortArray(500, 0);
+		// System.out.println(array.sort());
+		// array = new qSortArray(5000, 0);
+		// System.out.println(array.sort());
+		// array = new qSortArray(50000, 0);
+		// System.out.println(array.sort());
+		// array = new qSortArray(500, 1);
+		// System.out.println(array.sort());
+		// array = new qSortArray(5000, 1);
+		// System.out.println(array.sort());
+		// array = new qSortArray(50000, 1);
+		// System.out.println(array.sort());
+		// array = new qSortArray(500, 2);
+		// System.out.println(array.sort());
+		// array = new qSortArray(5000, 2);
+		// System.out.println(array.sort());
+		// array = new qSortArray(50000, 2);
+		// System.out.println(array.sort());
 
 	}
 
