@@ -92,7 +92,7 @@ public class ListRunner {
 			String out = list.add(flag);
 			System.out.print(out == "" ? "" : out + "\n");
 		}
-		else if (input.toLowerCase().trim().equals("remove")) {
+		else if (input.toLowerCase().trim().equals("remove") || input.toLowerCase().trim().equals("rem")) {
 			validInput = true;
 			if (flag == null) {
 				flag = getUserNum(" remove");
