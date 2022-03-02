@@ -68,10 +68,10 @@ public class ListRunner {
 
 	private static boolean parseInput(String input, boolean validInput) {
 		Integer flag = null;
-		if (input.split(" ").length == 2) {
+		if (input.trim().split(" ").length == 2) {
 
 			try {
-				flag = Integer.parseInt(input.split(" ")[1]);
+				flag = Integer.parseInt(input.trim().split(" ")[1]);
 			} catch (Exception e) {
 				System.out.println("Invalid Input");
 				return validInput;
