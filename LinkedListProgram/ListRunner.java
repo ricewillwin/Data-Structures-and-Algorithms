@@ -6,7 +6,9 @@ public class ListRunner {
 	private static LinkedList<Integer> list;
 	private static boolean again = true;
 
-
+	/**
+	 * Prints the program title bar and gets user input
+	 */
 	private static void userUI() {
 
 		String titleBackString = "\u001b[1B\u001b[35D";
@@ -47,6 +49,9 @@ public class ListRunner {
 
 	}
 
+	/**
+	 * Gets function from user input
+	 */
 	private static void getFunction() {
 
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -66,6 +71,12 @@ public class ListRunner {
 
 	}
 
+	/**
+	 * Parses a given input to find function
+	 * @param input
+	 * @param validInput
+	 * @return If the given input was valid
+	 */
 	private static boolean parseInput(String input, boolean validInput) {
 		Integer flag = null;
 		if (input.trim().split(" ").length == 2) {
@@ -112,6 +123,11 @@ public class ListRunner {
 
 	}
 
+	/**
+	 * Retreves a number from the user
+	 * @param func
+	 * @return User Number
+	 */
 	private static int getUserNum(String func) {
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		Integer number = null;

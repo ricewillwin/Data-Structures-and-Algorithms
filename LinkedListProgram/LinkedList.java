@@ -5,11 +5,20 @@ public class LinkedList<E extends Comparable <E>> {
 	private ListNode<E> front;
 	private int size;
 
+	/**
+	 * Creates a linked list of size 0
+	 */
 	public LinkedList() {
 		this.front = null;
 		this.size = 0;
 	}
 
+	/**
+	 * Inserts a node after prior
+	 * @param prior
+	 * @param newNode
+	 * @return prior
+	 */
 	private ListNode<E> insertNode(ListNode<E> prior, ListNode<E> newNode) {
 		
 		if (prior == null) {
@@ -28,6 +37,12 @@ public class LinkedList<E extends Comparable <E>> {
 
 	}
 
+	/**
+	 * Removes a node after prior
+	 * @param prior
+	 * @param nextNode
+	 * @return prior
+	 */
 	private ListNode<E> removeNode(ListNode<E> prior, ListNode<E> nextNode) {
 		
 		prior.setNext(nextNode);
@@ -35,10 +50,20 @@ public class LinkedList<E extends Comparable <E>> {
 		return prior;
 	}
 
+	/**
+	 * Adds a node from the given data in the correct location
+	 * @param data
+	 * @return Information about adding the node
+	 */
 	public String add(E data) {
 		return this.add(new ListNode<E>(data, null));
 	}
-	
+
+	/**
+	 * Adds a node in the correct location
+	 * @param newNode
+	 * @return Information about adding the node
+	 */
 	public String add(ListNode<E> newNode) {
 
 		if (this.front == null) {
@@ -79,10 +104,20 @@ public class LinkedList<E extends Comparable <E>> {
 
 	}
 
+	/**
+	 * Removes a given node from some data
+	 * @param data
+	 * @return Information about removing the node
+	 */
 	public String remove(E data) {
 		return this.remove(new ListNode<E>(data, null));
 	}
 	
+	/**
+	 * Removes a given node
+	 * @param removeNode
+	 * @return Information about removing the node
+	 */
 	public String remove(ListNode<E> removeNode) {
 
 		if (this.front == null) {
@@ -120,6 +155,10 @@ public class LinkedList<E extends Comparable <E>> {
 		}
 	}
 
+	/**
+	 * Returns the formatted list
+	 * @return formatted list
+	 */
 	@Override
   public String toString() {
 
@@ -137,6 +176,10 @@ public class LinkedList<E extends Comparable <E>> {
 		return out;
 	}
 
+	/**
+	 * Returns the first 5 elements in the list formatted
+	 * @return First 5 elements formatted
+	 */
 	public String uiOutput() {
 
 		if (front == null) {
