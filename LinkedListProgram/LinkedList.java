@@ -156,6 +156,13 @@ public class LinkedList<E extends Comparable <E>> {
 	}
 
 	/**
+	 * Resets entire list
+	 */
+	public void reset() {
+		this.front = null;
+	}
+
+	/**
 	 * Returns the formatted list
 	 * @return formatted list
 	 */
