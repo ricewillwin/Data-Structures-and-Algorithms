@@ -162,6 +162,33 @@ public class LinkedList<E extends Comparable <E>> {
 		this.front = null;
 	}
 
+
+	/**
+	 * Reverses the list
+	 */
+	public void reverseList() {
+		reverse(null, front);
+	}
+
+	/**
+	 * Check the next element in the list then reverse order.
+	 * @param prior current element
+	 * @param current next element
+	 */
+	private void reverse(ListNode<E> prior, ListNode<E> current) {
+
+		if (current.getNext() != null) {
+			reverse(current, current.getNext());
+		}
+		else {
+			this.front = current;
+		}
+
+		current.setNext(prior);
+
+	}
+
+
 	/**
 	 * Returns the formatted list
 	 * @return formatted list
@@ -211,3 +238,79 @@ public class LinkedList<E extends Comparable <E>> {
 	}
 
 }
+/*
+###################################
+##                               ##
+##      Linked List Program      ##
+##        By William Rice        ##
+##                               ##
+## ----------------------------- ##
+##                               ##
+##  Functions -                  ##
+##                               ##
+##  1.) Output List (out)        ##
+##      - Prints list            ##
+##                               ##
+##  2.) Add to List (add)        ##
+##      - Adds Integer to        ##
+##        list                   ##
+##                               ##
+##  3.) Remove From List (rem)   ##
+##      - Removes Integer        ##
+##        from the list          ##
+##                               ##
+##  4.) Reset List (reset)       ##
+##                               ##
+##  5.) Reverse List (reverse)   ##
+##                               ##
+##  6.) Stop Program (done)      ##
+##                               ##
+###################################
+
+List is empty
+>>> add 10
+
+[ 10 ]
+>>> add 20
+
+[ 10, 20 ]
+>>> add 1
+
+[ 1, 10, 20 ]
+>>> add 5
+
+[ 1, 5, 10, 20 ]
+>>> add 15
+
+[ 1, 5, 10, 15, 20 ]
+>>> reverse
+
+[ 20, 15, 10, 5, 1 ]
+>>> reverse
+
+[ 1, 5, 10, 15, 20 ]
+>>> add 100
+
+[ 1, 5, 10, 15, 20, ... ]
+>>> add 200
+
+[ 1, 5, 10, 15, 20, ... ]
+>>> add -1
+
+[ -1, 1, 5, 10, 15, ... ]
+>>> add -4
+
+[ -4, -1, 1, 5, 10, ... ]
+>>> out
+[ -4, -1, 1, 5, 10, 15, 20, 100, 200 ]
+
+[ -4, -1, 1, 5, 10, ... ]
+>>> reverse
+
+[ 200, 100, 20, 15, 10, ... ]
+>>> out
+[ 200, 100, 20, 15, 10, 5, 1, -1, -4 ]
+
+[ 200, 100, 20, 15, 10, ... ]
+>>> done
+*/

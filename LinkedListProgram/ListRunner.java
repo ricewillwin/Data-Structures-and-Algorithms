@@ -35,7 +35,9 @@ public class ListRunner {
 		"##                               ##" + titleBackString +
 		"##  4.) Reset List (reset)       ##" + titleBackString +
 		"##                               ##" + titleBackString +
-		"##  5.) Stop Program (done)      ##" + titleBackString +
+		"##  5.) Reverse List (reverse)   ##" + titleBackString +
+		"##                               ##" + titleBackString +
+		"##  6.) Stop Program (done)      ##" + titleBackString +
 		"##                               ##" + titleBackString +
 		"###################################" + titleBackString;
 
@@ -90,7 +92,7 @@ public class ListRunner {
 				return validInput;
 			}
 
-			input = input.split(" ")[0];
+			input = input.trim().split(" ")[0];
 		}
 
 		if (input.toLowerCase().trim().equals("out") || input.toLowerCase().trim().equals("output")) {
@@ -116,6 +118,10 @@ public class ListRunner {
 		else if (input.toLowerCase().trim().equals("reset")) {
 			validInput = true;
 			list.reset();
+		}
+		else if (input.toLowerCase().trim().equals("reverse")) {
+			validInput = true;
+			list.reverseList();
 		}
 		else if (input.toLowerCase().trim().equals("done")) {
 			validInput = true;
