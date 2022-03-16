@@ -7,7 +7,7 @@ public class ListRunner {
 // 	 * Adds a node to the list from a name in the following form
 // 	 * <p>lastName firstName</p>
 // 	 * @param data
-// 	 * @return something //TODO
+// 	 * @return Errors
 // 	 */
 	public static String add(LinkedList<Person> list, Person data) {
 		ListNode<Person> newNode = new ListNode<Person>(data, null, null);
@@ -183,7 +183,7 @@ public class ListRunner {
 	
 			String inputString = inFile.readLine();
 			while (inputString != null){
-				add(list, new Person(inputString.split(" ")[0], inputString.split(" ")[1], inputString.split(" ")[2]));
+				add(list, new Person(inputString.split(" ")[1], inputString.split(" ")[0], inputString.split(" ")[2]));
 				inputString = inFile.readLine();
 			}
 			inFile.close();
@@ -264,3 +264,93 @@ public class ListRunner {
 	}
 
 }
+
+/*
+###################################
+##                               ##
+##      Linked List Program      ##
+##        By William Rice        ##
+##                               ##
+## ----------------------------- ##
+##                               ##
+##  Functions -                  ##
+##                               ##
+##  1.) Output List (out)        ##
+##      - Prints list            ##
+##                               ##
+##  2.) Add to List (add)        ##
+##      - Adds Integer to        ##
+##        list                   ##
+##                               ##
+##  3.) Reset List (reset)       ##
+##                               ##
+##  4.) Reverse List (reverse)   ##
+##                               ##
+##  5.) Add from file (file)     ##
+##                               ##
+##  6.) Stop Program (done)      ##
+##                               ##
+###################################
+>>> file
+Enter the file name: PersonList.txt
+PersonList.txt
+
+
+>>> out
+[Abe, Ardvaark, IBM]
+[Alice, Ardvaark, IBM]
+[April, Field, APL]
+[Data, Field, APL]
+[Electromagnetic, Field, APL]
+[Sally, Field, APL]
+[Zoe, Field, APL]
+[Ima, Geek, DGT]
+[Sally, Guest, DGT]
+[Zoe, Guest, APL]
+[Asdfgh, Keys, DGT]
+[Qwerty, Keys, IBM]
+[Cal, Kulate, DGT]
+[Linc, List, APL]
+[Doyour, Math, DGT]
+[Iluv, Math, DGT]
+[Ura, Nerd, IBM]
+[Blaise, Pascal, APL]
+[Sally, Pascal, FCA]
+[Suzy, Queue, IBM]
+[Amy, Rochip, IBM]
+[Mike, Rochip, DGT]
+[Genevieve, Stapos, DGT]
+[Closda, Windoes, APL]
+[Didja, Windoes, APL]
+[Howard, Yadoing, DGT]
+
+>>> reverse
+[Howard, Yadoing, DGT]
+[Didja, Windoes, APL]
+[Closda, Windoes, APL]
+[Genevieve, Stapos, DGT]
+[Mike, Rochip, DGT]
+[Amy, Rochip, IBM]
+[Suzy, Queue, IBM]
+[Sally, Pascal, FCA]
+[Blaise, Pascal, APL]
+[Ura, Nerd, IBM]
+[Iluv, Math, DGT]
+[Doyour, Math, DGT]
+[Linc, List, APL]
+[Cal, Kulate, DGT]
+[Qwerty, Keys, IBM]
+[Asdfgh, Keys, DGT]
+[Zoe, Guest, APL]
+[Sally, Guest, DGT]
+[Ima, Geek, DGT]
+[Zoe, Field, APL]
+[Sally, Field, APL]
+[Electromagnetic, Field, APL]
+[Data, Field, APL]
+[April, Field, APL]
+[Alice, Ardvaark, IBM]
+[Abe, Ardvaark, IBM]
+
+>>> done
+*/

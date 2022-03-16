@@ -69,7 +69,7 @@ public class LinkedList<E extends Comparable<E>> {
 	/**
 	 * Adds a node from the front of the list
 	 * @param newNode
-	 * @return something //TODO
+	 * @return Errors
 	 */
 	public String addFront(ListNode<E> newNode) {
 
@@ -114,7 +114,7 @@ public class LinkedList<E extends Comparable<E>> {
 	/**
 	 * Adds a node from the back of the list
 	 * @param newNode
-	 * @return something //TODO
+	 * @return Errors
 	 */
 	public String addBack(ListNode<E> newNode) {
 
@@ -175,13 +175,13 @@ public class LinkedList<E extends Comparable<E>> {
 			return "List is empty";
 		}
 
-		String out = "[ ";
+		String out = "";
 		ListNode current = front;
 		while (current.getNext() != null) {
 			out += current.getData() + "\n";
 			current = current.getNext();
 		}
-		out += current.getData() + " ]";
+		out += current.getData();
 		return out;
 	}
 
@@ -195,13 +195,13 @@ public class LinkedList<E extends Comparable<E>> {
 			return "List is empty";
 		}
 
-		String out = "[ ";
+		String out = "";
 		ListNode current = back;
 		while (current.getPrevious() != null) {
 			out += current.getData() + "\n";
 			current = current.getPrevious();
 		}
-		out += current.getData() + " ]";
+		out += current.getData();
 		return out;
 	}
 
