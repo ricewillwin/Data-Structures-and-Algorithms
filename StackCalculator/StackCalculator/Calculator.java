@@ -3,13 +3,7 @@ package StackCalculator;
 public class Calculator {
 
 	private static LinkedStack<Integer> memStack = new LinkedStack<Integer>();
-
-	/**
-	 * Creates a Calculator
-	 */
-	// public Calculator() {
-	// }
-
+	
 	/**
 	 * Returns a number to a power.
 	 * @param numOne - The base number
@@ -33,11 +27,11 @@ public class Calculator {
 	public static int tet(int numOne, int numTwo) {
 		int pow = numOne;
 		for (int i = 1; i < numTwo; i++) {
-			pow = pow(numOne, pow);
+				pow = pow(numOne, pow);
+			}
+			return pow;
 		}
-		return pow;
-	}
-
+	
 	/**
 	 * Performs an operation on the stack
 	 * @param c - The operation to perform
