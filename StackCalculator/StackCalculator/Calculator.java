@@ -1,7 +1,5 @@
 package StackCalculator;
 
-import javax.naming.LinkLoopException;
-
 public class Calculator {
 
 	private static LinkedStack<Integer> memStack = new LinkedStack<Integer>();
@@ -12,7 +10,13 @@ public class Calculator {
 	// public Calculator() {
 	// }
 
-	private static int pow(int numOne, int numTwo) {
+	/**
+	 * Returns a number to a power.
+	 * @param numOne - The base number
+	 * @param numTwo - The power
+	 * @return int - the resulting number
+	 */
+	public static int pow(int numOne, int numTwo) {
 		int result = 1;
 		for (int i = 0; i < numTwo; i++) {
 			result *= numOne;
@@ -20,7 +24,26 @@ public class Calculator {
 		return result;
 	}
 
-	private static void opp(char c) throws Exception {
+	/**
+	 * Returns a number to the tetration
+	 * @param numOne - The base number
+	 * @param numTwo - The height of the tetration
+	 * @return int - the resulting number
+	 */
+	public static int tet(int numOne, int numTwo) {
+		int pow = numOne;
+		for (int i = 1; i < numTwo; i++) {
+			pow = pow(numOne, pow);
+		}
+		return pow;
+	}
+
+	/**
+	 * Performs an operation on the stack
+	 * @param c - The operation to perform
+	 * @throws Exception Throws if the given operator or Equation is not valid
+	 */
+	private static void operate(String c) throws Exception {
 		int digitOne;
 		int digitTwo;
 		
@@ -32,32 +55,44 @@ public class Calculator {
 			throw new Exception("Invalid Equation");
 		}
 
-		if (c == '+') {
+		if (c.equals("+")) {
 			memStack.push(digitOne + digitTwo);
 			return;
 		}
-		else if (c == '-') {
+		else if (c.equals("-")) {
 			memStack.push(digitOne - digitTwo);
 			return;
 		}
-		else if (c == '*') {
+		else if (c.equals("*")) {
 			memStack.push(digitOne * digitTwo);
 			return;
 		}
-		else if (c == '/') {
+		else if (c.equals("/")) {
 			memStack.push(digitOne / digitTwo);
 			return;
 		}
-		else if (c == '^') {
+		else if (c.equals("%")) {
+			memStack.push(digitOne % digitTwo);
+		}
+		else if (c.equals("**")) {
 			memStack.push(pow(digitOne, digitTwo));
 			return;
 		}
+		else if (c.equals("***")) {
+			memStack.push(tet(digitOne, digitTwo));
+		}
+
 		else {
 			throw new Exception("Invalid Operation");
 		}
 
 	}
 
+	/**
+	 * Calculates the numerical answer from a given string
+	 * @param equation - The equation in postfix notation
+	 * @return Integer - The resulting number
+	 */
 	public static Integer calculate(String equation) {
 
 		while (!memStack.isEmpty()) {
@@ -70,7 +105,7 @@ public class Calculator {
 			}
 			catch (Exception e) {
 				try {
-					opp(num.charAt(0));
+					operate(num);
 				}
 				catch (Exception ee) {
 					System.out.println("Invalid Operation");
@@ -89,10 +124,5 @@ public class Calculator {
 		}
 
 	}
-
-	public static int calculate(LinkedStack<Integer> equation) {
-		return 0;
-	}
-
 
 }
