@@ -17,7 +17,7 @@ public class LinkedStack<E> implements Stack<E> {
 		this.top = new ListNode<E>(element, top);
 	}
 	
-	public E peek() {
+	public E peek() throws EmptyStackException {
 		try {
 			return this.top.getData();
 		}
@@ -26,7 +26,7 @@ public class LinkedStack<E> implements Stack<E> {
 		}
 	}
 
-	public E pop() {
+	public E pop() throws EmptyStackException {
 		try {
 			ListNode<E> oldTop = top;
 			this.top = top.getNext();

@@ -1,7 +1,7 @@
 package StackCalculator;
-import java.util.EmptyStackException;
 
 import StackCalculator.Exceptions.*;
+import java.util.EmptyStackException;
 
 public class Calculator {
 
