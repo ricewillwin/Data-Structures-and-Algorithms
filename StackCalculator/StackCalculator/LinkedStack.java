@@ -1,5 +1,7 @@
 package StackCalculator;
 
+import java.util.EmptyStackException;
+
 public class LinkedStack<E> implements Stack<E> {
 	
 	private ListNode<E> top;
@@ -16,13 +18,23 @@ public class LinkedStack<E> implements Stack<E> {
 	}
 	
 	public E peek() {
-		return this.top.getData();
+		try {
+			return this.top.getData();
+		}
+		catch (NullPointerException e) {
+			throw new EmptyStackException();
+		}
 	}
 
 	public E pop() {
-		ListNode<E> oldTop = top;
-		this.top = top.getNext();
-		return oldTop.getData();
+		try {
+			ListNode<E> oldTop = top;
+			this.top = top.getNext();
+			return oldTop.getData();
+		}
+		catch (NullPointerException e) {
+			throw new EmptyStackException();
+		}
 	}
 
 	public boolean isEmpty() {

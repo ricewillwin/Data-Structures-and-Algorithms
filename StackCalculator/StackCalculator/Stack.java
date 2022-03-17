@@ -1,5 +1,7 @@
 package StackCalculator;
 
+import java.util.EmptyStackException;
+
 public interface Stack<E> {
 	
 	/**
@@ -11,14 +13,16 @@ public interface Stack<E> {
 	/**
 	* Removes the top element in the stack.
 	* @return E - the removed element.
+	* @throws EmptyStackException If the stack is empty
 	*/
-	public abstract E pop();
+	public abstract E pop() throws EmptyStackException;
 
 	/**
 	 * Returns the top element in the stack.
 	 * @return E - the top element.
+	 * @throws EmptyStackException If the stack is empty
 	 */
-	public abstract E peek();
+	public abstract E peek() throws EmptyStackException;
 
 	/**
 	 * Returns if the stack is empty.

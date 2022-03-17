@@ -1,4 +1,7 @@
 package StackCalculator;
+import java.util.EmptyStackException;
+
+import StackCalculator.Exceptions.*;
 
 public class Calculator {
 
@@ -37,7 +40,7 @@ public class Calculator {
 	 * @param c - The operation to perform
 	 * @throws Exception Throws if the given operator or Equation is not valid
 	 */
-	private static void operate(String c) throws Exception {
+	private static void operate(String c) throws InvalidExpressionException, InvalidOperatorException {
 		int digitOne;
 		int digitTwo;
 		
@@ -45,8 +48,8 @@ public class Calculator {
 			digitTwo = memStack.pop();
 			digitOne = memStack.pop();
 		}
-		catch (Exception e){
-			throw new Exception("Invalid Equation");
+		catch (EmptyStackException e){
+			throw new InvalidExpressionException();
 		}
 
 		if (c.equals("+")) {
@@ -77,7 +80,7 @@ public class Calculator {
 		}
 
 		else {
-			throw new Exception("Invalid Operation");
+			throw new InvalidOperatorException();
 		}
 
 	}
@@ -97,11 +100,15 @@ public class Calculator {
 			try {
 				memStack.push(Integer.parseInt(num));
 			}
-			catch (Exception e) {
+			catch (NumberFormatException e) {
 				try {
 					operate(num);
 				}
-				catch (Exception ee) {
+				catch (InvalidExpressionException ee) {
+					System.out.println("Invalid Expression");
+					return null;
+				}
+				catch (InvalidOperatorException ee) {
 					System.out.println("Invalid Operation");
 					return null;
 				}
