@@ -41,4 +41,9 @@ public class LinkedStack<E> implements Stack<E> {
 		return top == null;
 	}
 
+	@Override
+	public String toString() {
+		return top.toString();
+	}
+
 }

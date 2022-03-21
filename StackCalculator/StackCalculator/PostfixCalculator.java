@@ -3,7 +3,7 @@ package StackCalculator;
 import StackCalculator.Exceptions.*;
 import java.util.EmptyStackException;
 
-public class Calculator {
+public class PostfixCalculator {
 
 	private static LinkedStack<Integer> memStack = new LinkedStack<Integer>();
 	
@@ -49,7 +49,7 @@ public class Calculator {
 			digitOne = memStack.pop();
 		}
 		catch (EmptyStackException e){
-			throw new InvalidExpressionException();
+			throw new InvalidExpressionException(memStack);
 		}
 
 		if (c.equals("+")) {
@@ -80,7 +80,7 @@ public class Calculator {
 		}
 
 		else {
-			throw new InvalidOperatorException();
+			throw new InvalidOperatorException(c);
 		}
 
 	}
@@ -105,11 +105,11 @@ public class Calculator {
 					operate(num);
 				}
 				catch (InvalidExpressionException ee) {
-					System.out.println("Invalid Expression");
+					System.out.println(ee);
 					return null;
 				}
 				catch (InvalidOperatorException ee) {
-					System.out.println("Invalid Operation");
+					System.out.println(ee);
 					return null;
 				}
 			}
@@ -117,7 +117,7 @@ public class Calculator {
 		int result = memStack.pop();
 		
 		if (!memStack.isEmpty()) {
-			System.out.println("Invalid Expression");
+			System.out.println(new InvalidExpressionException(memStack));
 			return null;
 		}
 		else {
