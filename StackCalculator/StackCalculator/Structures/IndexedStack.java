@@ -1,4 +1,4 @@
-package StackCalculator;
+package StackCalculator.Structures;
 
 import java.util.EmptyStackException;
 
@@ -7,6 +7,10 @@ public class IndexedStack<E> implements Stack<E> {
 	E[] data;
 	int topOfStack = -1;
 
+	/**
+	 * Creates an empty Stack.
+	 * @param length
+	 */
 	public IndexedStack(int length) {
 		data = (E[]) new Object[length];
 	}

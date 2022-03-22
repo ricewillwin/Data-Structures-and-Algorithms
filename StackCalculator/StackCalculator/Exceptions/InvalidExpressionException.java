@@ -1,6 +1,7 @@
 package StackCalculator.Exceptions;
 
 import StackCalculator.*;
+import StackCalculator.Structures.LinkedStack;
 
 public class InvalidExpressionException extends Exception{
 

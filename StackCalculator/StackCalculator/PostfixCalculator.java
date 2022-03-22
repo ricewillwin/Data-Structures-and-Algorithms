@@ -1,6 +1,8 @@
 package StackCalculator;
 
 import StackCalculator.Exceptions.*;
+import StackCalculator.Structures.LinkedStack;
+
 import java.util.EmptyStackException;
 
 public class PostfixCalculator {
