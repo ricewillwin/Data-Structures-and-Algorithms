@@ -15,7 +15,7 @@ public class PostfixCalculator {
 	 * @param numTwo - The power
 	 * @return int - the resulting number
 	 */
-	public static int pow(int numOne, int numTwo) {
+	private static int pow(int numOne, int numTwo) {
 		int result = 1;
 		for (int i = 0; i < numTwo; i++) {
 			result *= numOne;
@@ -29,7 +29,7 @@ public class PostfixCalculator {
 	 * @param numTwo - The height of the tetration
 	 * @return int - the resulting number
 	 */
-	public static int tet(int numOne, int numTwo) {
+	private static int tet(int numOne, int numTwo) {
 		int pow = numOne;
 		for (int i = 1; i < numTwo; i++) {
 				pow = pow(numOne, pow);
@@ -67,8 +67,13 @@ public class PostfixCalculator {
 			return;
 		}
 		else if (c.equals("/")) {
-			memStack.push(digitOne / digitTwo);
-			return;
+			try {
+				memStack.push(digitOne / digitTwo);
+				return;
+			}
+			catch (ArithmeticException e) {
+				throw new InvalidExpressionException(memStack);
+			}
 		}
 		else if (c.equals("%")) {
 			memStack.push(digitOne % digitTwo);

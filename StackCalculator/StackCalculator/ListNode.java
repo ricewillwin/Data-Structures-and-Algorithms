@@ -5,11 +5,15 @@ public class ListNode<E> {
 	private E data;
 	private ListNode<E> next;
 
+	/**
+	 * Creates a singularly linked node with the given data.
+	 * @param data - Data to store
+	 * @param next - Following Node
+	 */
 	public ListNode(E data, ListNode<E> next) {
 		this.data = data;
 		this.next = next;
 	}
-
 
 	/**
 	 * @return E - the data.

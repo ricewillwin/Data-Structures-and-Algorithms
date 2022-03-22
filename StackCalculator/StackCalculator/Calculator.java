@@ -1,81 +1,80 @@
 package StackCalculator;
 
 import java.util.EmptyStackException;
+
 import StackCalculator.Structures.IndexedStack;
+import StackCalculator.Structures.Operator;
 
 public class Calculator {
-	
-	private static IndexedStack<Character> operatorStack;
-	private static String postFixString = "";
 
-	public static int calculate(String equation) {
-		convertInfix(equation);
-		return PostfixCalculator.calculate(postFixString);
+	/**
+	 * Calculates the Integer result of the given infix string.
+	 * @param expression - Expression to solve in infix notation.
+	 * @return Integer - Result of the expression.
+	 */
+	public static Integer calculate(String expression) {
+		return PostfixCalculator.calculate(convertInfix(expression));
 	}
 
-	private static void convertInfix(String equation) {
-		operatorStack = new IndexedStack<>(equation.length());
-		postFixString = "";
+	/**
+	 * Converts from infix to postfix.
+	 * @param expression - The equation to convert.
+	 * @return String - The given expression in postfix notation.
+	 */
+	private static String convertInfix(String expression) {
+		IndexedStack<Operator> operatorStack = new IndexedStack<>(expression.length());
+		String postFixString = "";
 
-		for (char c : equation.toCharArray()) {
-			if (isOperator(c)) {
-				operator(c);
+		for (char c : expression.toCharArray()) {
+			try {
+				Operator op = new Operator(c);
+				Object[] temp = operator(op, operatorStack, postFixString);
+				operatorStack = (IndexedStack<Operator>) temp[0];
+				postFixString = (String) temp[1];
 			}
-			else {
+			catch (Exception e) {
+				if (c != ' ') {
 					postFixString += c + " ";
+				}
 			}
 		}
 		while (!operatorStack.isEmpty()) {
 			postFixString += operatorStack.pop() + " ";
 		}
+
+		return postFixString;
 		
 	}
 
-	private static boolean isOperator(char c) {
-		if ("+-/*()".indexOf(c) != -1) {
-			return true;
-		}
-
-		return false;
-	}
-
-	private static int valueOf(char c) {
-		if (c == '+' || c =='-') {
-			return 1;
-		}
-		else if (c == '/' || c == '*') {
-			return 2;
-		}
-		else if (c == '(') {
-			return -2;
-		}
-		else if (c == ')') {
-			return -1;
-		}
-		else {
-			return 0;
-		}
-	}
-
-	private static void operator(char c) {
+	/**
+	 * Adds or removed operators from the stack.
+	 * @param operator - Operator to add.
+	 * @param operatorStack - Stack of operators.
+	 * @param postFixString - String in postfix notation.
+	 * @return {operatorStack, postFixString} - The modified values
+	 */
+	private static Object[] operator(Operator operator, IndexedStack<Operator> operatorStack, String postFixString) {
 		try {
-			while (valueOf(c) != -2 && valueOf(c) <= valueOf(operatorStack.peek())) {
+			while (operator.valueOf() != -2 && operator.compareTo(operatorStack.peek()) < 0) {
 				postFixString += operatorStack.pop() + " ";
 			}
-			while (valueOf(c) == -1 && valueOf(operatorStack.peek()) != -2) {
+			while (operator.valueOf() == -1 && operatorStack.peek().valueOf() != -2) {
 					postFixString += operatorStack.pop() + " ";
 			}
 
-			if (valueOf(c) == -1) {
+			if (operator.valueOf() == -1) {
 				operatorStack.pop();
 			}
 			else {
-				operatorStack.push(c);
+				operatorStack.push(operator);
 			}
 		}
 		catch (EmptyStackException e) {
-			operatorStack.push(c);
+			operatorStack.push(operator);
 		}
+
+		return new Object[]{operatorStack, postFixString};
+
 	}
 
 }

@@ -10,7 +10,7 @@ public class InvalidOperatorException extends Exception {
 
 	@Override
 	public String toString() {
-		return "The given operator " + operator + " is not accepted";
+		return "The given operator \"" + operator + "\" is not accepted";
 	}
 
 }

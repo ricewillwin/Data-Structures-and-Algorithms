@@ -42,10 +42,13 @@ public class LinkedStack<E> implements Stack<E> {
 	public boolean isEmpty() {
 		return top == null;
 	}
-
+	
 	@Override
 	public String toString() {
-		return top.toString();
+		if (!isEmpty()) {
+			return top.toString();
+		}
+		return "";
 	}
 
 }
