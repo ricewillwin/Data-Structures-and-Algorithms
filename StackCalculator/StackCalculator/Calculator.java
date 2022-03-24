@@ -29,7 +29,7 @@ public class Calculator {
 			try {
 				Operator op = new Operator(c);
 				Object[] temp = operator(op, operatorStack, postFixString);
-				operatorStack = (IndexedStack<Operator>) temp[0];
+				operatorStack =  (IndexedStack<Operator>) temp[0];
 				postFixString = (String) temp[1];
 			}
 			catch (Exception e) {
