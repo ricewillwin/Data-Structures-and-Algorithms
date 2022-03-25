@@ -56,22 +56,22 @@ public class Calculator {
 	 */
 	private static Operator createOperator(char c) throws InvalidOperatorException {
 		if (c == '+') {
-			return new Addition(c);
+			return new Addition();
 		}
 		else if (c == '-') {
-			return new Subtraction(c);
+			return new Subtraction();
 		}
 		else if (c == '*') {
-			return new Multiplication(c);
+			return new Multiplication();
 		}
 		else if (c == '/') {
-			return new Division(c);
+			return new Division();
 		}
 		else if (c == '(') {
-			return new LeftParenthesis(c);
+			return new LeftParenthesis();
 		}
 		else if (c == ')') {
-			return new RightParenthesis(c);
+			return new RightParenthesis();
 		}
 		else {
 			throw new InvalidOperatorException(Character.toString(c));
