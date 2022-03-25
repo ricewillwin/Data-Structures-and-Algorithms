@@ -1,16 +1,16 @@
-package StackCalculator;
+package StackCalculator.Structures;
 
-public class ListNode<E> {
+public class Node<E> {
 
 	private E data;
-	private ListNode<E> next;
+	private Node<E> next;
 
 	/**
 	 * Creates a singularly linked node with the given data.
 	 * @param data - Data to store
 	 * @param next - Following Node
 	 */
-	public ListNode(E data, ListNode<E> next) {
+	public Node(E data, Node<E> next) {
 		this.data = data;
 		this.next = next;
 	}
@@ -32,14 +32,14 @@ public class ListNode<E> {
 	/**
 	 * @return ListNode<E> - the next node.
 	 */
-	public ListNode<E> getNext() {
+	public Node<E> getNext() {
 			return this.next;
 	}
 
 	/**
 	 * @param next - the next node to set.
 	 */
-	public void setNext(ListNode<E> next) {
+	public void setNext(Node<E> next) {
 			this.next = next;
 	}
 

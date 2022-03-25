@@ -2,11 +2,9 @@ package StackCalculator.Structures;
 
 import java.util.EmptyStackException;
 
-import StackCalculator.ListNode;
-
 public class LinkedStack<E> implements Stack<E> {
 	
-	private ListNode<E> top;
+	private Node<E> top;
 
 	/**
 	 * Creates an empty LinkedStack.
@@ -16,7 +14,7 @@ public class LinkedStack<E> implements Stack<E> {
 	}
 
 	public void push(E element) {
-		this.top = new ListNode<E>(element, top);
+		this.top = new Node<E>(element, top);
 	}
 	
 	public E peek() throws EmptyStackException {
@@ -30,7 +28,7 @@ public class LinkedStack<E> implements Stack<E> {
 
 	public E pop() throws EmptyStackException {
 		try {
-			ListNode<E> oldTop = top;
+			Node<E> oldTop = top;
 			this.top = top.getNext();
 			return oldTop.getData();
 		}

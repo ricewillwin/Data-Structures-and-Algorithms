@@ -14,9 +14,7 @@ public class Calculator {
 	 * @return Integer - Result of the expression.
 	 */
 	public static Integer calculate(String expression) {
-		String eq = convertInfix(expression);
-		System.out.println(eq);
-		return PostfixCalculator.calculate(eq);
+		return PostfixCalculator.calculate(convertInfix(expression));
 	}
 
 	/**

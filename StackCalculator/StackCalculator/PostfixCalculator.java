@@ -2,94 +2,70 @@ package StackCalculator;
 
 import StackCalculator.Exceptions.*;
 import StackCalculator.Structures.LinkedStack;
+import StackCalculator.Structures.Math.*;
 
 import java.util.EmptyStackException;
 
 public class PostfixCalculator {
 
 	private static LinkedStack<Integer> memStack = new LinkedStack<Integer>();
-	
-	/**
-	 * Returns a number to a power.
-	 * @param numOne - The base number
-	 * @param numTwo - The power
-	 * @return int - the resulting number
-	 */
-	private static int pow(int numOne, int numTwo) {
-		int result = 1;
-		for (int i = 0; i < numTwo; i++) {
-			result *= numOne;
-		}
-		return result;
-	}
 
-	/**
-	 * Returns a number to the tetration
-	 * @param numOne - The base number
-	 * @param numTwo - The height of the tetration
-	 * @return int - the resulting number
-	 */
-	private static int tet(int numOne, int numTwo) {
-		int pow = numOne;
-		for (int i = 1; i < numTwo; i++) {
-				pow = pow(numOne, pow);
-			}
-			return pow;
-		}
-	
 	/**
 	 * Performs an operation on the stack
 	 * @param c - The operation to perform
 	 * @throws Exception Throws if the given operator or Equation is not valid
 	 */
-	private static void operate(String c) throws InvalidExpressionException, InvalidOperatorException {
+	private static void operate(char c) throws InvalidExpressionException, InvalidOperatorException {
 		int digitOne;
 		int digitTwo;
+		Operator op;
 		
 		try {
 			digitTwo = memStack.pop();
 			digitOne = memStack.pop();
+			op = createOperator(c);
 		}
 		catch (EmptyStackException e){
 			throw new InvalidExpressionException(memStack);
 		}
 
-		if (c.equals("+")) {
-			memStack.push(digitOne + digitTwo);
-			return;
+		try {
+			memStack.push(op.operate(digitOne, digitTwo));
 		}
-		else if (c.equals("-")) {
-			memStack.push(digitOne - digitTwo);
-			return;
-		}
-		else if (c.equals("*")) {
-			memStack.push(digitOne * digitTwo);
-			return;
-		}
-		else if (c.equals("/")) {
-			try {
-				memStack.push(digitOne / digitTwo);
-				return;
-			}
-			catch (ArithmeticException e) {
-				throw new InvalidExpressionException(memStack);
-			}
-		}
-		else if (c.equals("%")) {
-			memStack.push(digitOne % digitTwo);
-		}
-		else if (c.equals("**")) {
-			memStack.push(pow(digitOne, digitTwo));
-			return;
-		}
-		else if (c.equals("***")) {
-			memStack.push(tet(digitOne, digitTwo));
+		catch (ArithmeticException e) {
+			throw new InvalidExpressionException(memStack);
 		}
 
+	}
+
+	/**
+	 * Returns an operator from a character.
+	 * @param c - The character that represents the operator.
+	 * @return Operator - The given operator.
+	 * @throws InvalidOperatorException - If the given character is not a supported operator.
+	 */
+	private static Operator createOperator(char c) throws InvalidOperatorException {
+		if (c == '+') {
+			return new Addition(c);
+		}
+		else if (c == '-') {
+			return new Subtraction(c);
+		}
+		else if (c == '*') {
+			return new Multiplication(c);
+		}
+		else if (c == '/') {
+			return new Division(c);
+		}
+		else if (c == '(') {
+			return new LeftParenthesis(c);
+		}
+		else if (c == ')') {
+			return new RightParenthesis(c);
+		}
 		else {
-			throw new InvalidOperatorException(c);
+			throw new InvalidOperatorException(Character.toString(c));
 		}
-
 	}
 
 	/**
@@ -109,9 +85,10 @@ public class PostfixCalculator {
 			}
 			catch (NumberFormatException e) {
 				try {
-					operate(num);
+					operate(num.charAt(0));
 				}
 				catch (InvalidExpressionException ee) {
+					System.out.println(memStack);
 					System.out.println(ee);
 					return null;
 				}
