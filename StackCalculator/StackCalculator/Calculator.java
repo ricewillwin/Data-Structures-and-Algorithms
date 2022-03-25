@@ -2,8 +2,9 @@ package StackCalculator;
 
 import java.util.EmptyStackException;
 
+import StackCalculator.Exceptions.InvalidOperatorException;
 import StackCalculator.Structures.IndexedStack;
-import StackCalculator.Structures.Operator;
+import StackCalculator.Structures.Math.*;
 
 public class Calculator {
 
@@ -13,7 +14,9 @@ public class Calculator {
 	 * @return Integer - Result of the expression.
 	 */
 	public static Integer calculate(String expression) {
-		return PostfixCalculator.calculate(convertInfix(expression));
+		String eq = convertInfix(expression);
+		System.out.println(eq);
+		return PostfixCalculator.calculate(eq);
 	}
 
 	/**
@@ -27,7 +30,7 @@ public class Calculator {
 
 		for (char c : expression.toCharArray()) {
 			try {
-				Operator op = new Operator(c);
+				Operator op = createOperator(c);
 				Object[] temp = operator(op, operatorStack, postFixString);
 				operatorStack =  (IndexedStack<Operator>) temp[0];
 				postFixString = (String) temp[1];
@@ -47,6 +50,36 @@ public class Calculator {
 	}
 
 	/**
+	 * Returns an operator from a character.
+	 * @param c - The character that represents the operator.
+	 * @return Operator - The given operator.
+	 * @throws InvalidOperatorException - If the given character is not a supported operator.
+	 */
+	private static Operator createOperator(char c) throws InvalidOperatorException {
+		if (c == '+') {
+			return new Addition(c);
+		}
+		else if (c == '-') {
+			return new Subtraction(c);
+		}
+		else if (c == '*') {
+			return new Multiplication(c);
+		}
+		else if (c == '/') {
+			return new Division(c);
+		}
+		else if (c == '(') {
+			return new LeftParenthesis(c);
+		}
+		else if (c == ')') {
+			return new RightParenthesis(c);
+		}
+		else {
+			throw new InvalidOperatorException(Character.toString(c));
+		}
+	}
+
+	/**
 	 * Adds or removed operators from the stack.
 	 * @param operator - Operator to add.
 	 * @param operatorStack - Stack of operators.
@@ -55,13 +88,14 @@ public class Calculator {
 	 */
 	private static Object[] operator(Operator operator, IndexedStack<Operator> operatorStack, String postFixString) {
 		try {
-			while (operator.valueOf() != -2 && operator.compareTo(operatorStack.peek()) < 0) {
+
+			while (operator.valueOf() != -2 && operator.compareTo(operatorStack.peek()) <= 0) {
 				postFixString += operatorStack.pop() + " ";
 			}
 			while (operator.valueOf() == -1 && operatorStack.peek().valueOf() != -2) {
-					postFixString += operatorStack.pop() + " ";
+				postFixString += operatorStack.pop() + " ";
 			}
-
+			
 			if (operator.valueOf() == -1) {
 				operatorStack.pop();
 			}
