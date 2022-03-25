@@ -1,14 +1,11 @@
 package StackCalculator.Structures.Math;
 
-import StackCalculator.Exceptions.InvalidOperatorException;
-
 public class Division implements Operator {
 	
-	public Division(char c) throws InvalidOperatorException {
-		if (c != '/') {
-			throw new InvalidOperatorException(Character.toString(c));
-		}
-	}
+	/**
+	 * Creates an Division Operator.
+	 */
+	public Division() {}
 
 	@Override
 	public Integer valueOf() {

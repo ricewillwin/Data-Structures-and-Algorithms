@@ -1,14 +1,11 @@
 package StackCalculator.Structures.Math;
 
-import StackCalculator.Exceptions.InvalidOperatorException;
-
 public class LeftParenthesis implements Operator {
 
-	public LeftParenthesis(char c) throws InvalidOperatorException {
-		if (c != '(') {
-			throw new InvalidOperatorException(Character.toString(c));
-		}
-	}
+	/**
+	 * Creates an Left Parenthesis Operator.
+	 */
+	public LeftParenthesis() {}
 
 	@Override
 	public Integer valueOf() {

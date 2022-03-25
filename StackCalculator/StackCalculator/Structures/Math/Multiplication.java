@@ -1,14 +1,11 @@
 package StackCalculator.Structures.Math;
 
-import StackCalculator.Exceptions.InvalidOperatorException;
-
 public class Multiplication implements Operator {
 	
-	public Multiplication(char c) throws InvalidOperatorException {
-		if (c != '*') {
-			throw new InvalidOperatorException(Character.toString(c));
-		}
-	}
+	/**
+	 * Creates an Multiplication Operator.
+	 */
+	public Multiplication() {}
 
 	@Override
 	public Integer valueOf() {

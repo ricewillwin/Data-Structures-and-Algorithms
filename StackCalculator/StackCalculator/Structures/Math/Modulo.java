@@ -1,14 +1,11 @@
 package StackCalculator.Structures.Math;
 
-import StackCalculator.Exceptions.InvalidOperatorException;
-
 public class Modulo implements Operator{
 	
-	public Modulo(char c) throws InvalidOperatorException {
-		if (c != '%') {
-			throw new InvalidOperatorException(Character.toString(c));
-		}
-	}
+	/**
+	 * Creates an Modulo Operator.
+	 */
+	public Modulo() {}
 
 	@Override
 	public Integer valueOf() {

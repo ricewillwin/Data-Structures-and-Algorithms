@@ -4,6 +4,10 @@ public class InvalidOperatorException extends Exception {
 
 	private String operator;
 
+	/**
+	 * Creates an Invalid Operator Exception.
+	 * @param operator - String operator.
+	 */
 	public InvalidOperatorException(String operator) {
 		this.operator = operator;
 	}

@@ -1,14 +1,11 @@
 package StackCalculator.Structures.Math;
 
-import StackCalculator.Exceptions.InvalidOperatorException;
-
 public class Subtraction implements Operator {
 	
-	public Subtraction(char c) throws InvalidOperatorException {
-		if (c != '-') {
-			throw new InvalidOperatorException(Character.toString(c));
-		}
-	}
+	/**
+	 * Creates an Subtraction Operator.
+	 */
+	public Subtraction() {}
 
 	@Override
 	public Integer valueOf() {

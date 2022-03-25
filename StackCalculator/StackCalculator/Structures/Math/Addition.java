@@ -1,14 +1,11 @@
 package StackCalculator.Structures.Math;
 
-import StackCalculator.Exceptions.InvalidOperatorException;
-
 public class Addition implements Operator{
 
-	public Addition(char c) throws InvalidOperatorException {
-		if (c != '+') {
-			throw new InvalidOperatorException(Character.toString(c));
-		}
-	}
+	/**
+	 * Creates an Addition Operator.
+	 */
+	public Addition() {}
 
 	@Override
 	public Integer valueOf() {

@@ -11,6 +11,7 @@ public class IndexedStack<E> implements Stack<E> {
 	 * Creates an empty Stack.
 	 * @param length
 	 */
+	@SuppressWarnings("unchecked")
 	public IndexedStack(int length) {
 		data = (E[]) new Object[length];
 	}

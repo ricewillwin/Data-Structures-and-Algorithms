@@ -22,6 +22,7 @@ public class Calculator {
 	 * @param expression - The equation to convert.
 	 * @return String - The given expression in postfix notation.
 	 */
+	@SuppressWarnings("unchecked")
 	private static String convertInfix(String expression) {
 		IndexedStack<Operator> operatorStack = new IndexedStack<>(expression.length());
 		String postFixString = "";
@@ -87,19 +88,44 @@ public class Calculator {
 	private static Object[] operator(Operator operator, IndexedStack<Operator> operatorStack, String postFixString) {
 		try {
 
+			// If the given operator is not a left parenthesis and the given
+			// operator has less precedence then the top of the stack will be
+			// moved to the post fix string
+			//
+			// Ex.
+			// String - "1*2+1"
+			// 1.)
+			// 	String : "1"
+			// 	Stack : [ ]
+			// 	Operator : *
+			// 		- empty -> push "*"
+			// 2.)
+			// 	String : "12"
+			// 	Stack : [ * ]
+			// 	Operator : +
+			// 		- "+" < "*" -> pop "*" then push "+"
+			// 3.)
+			// 	String : "12*1"
+			// 	Stack : [ + ]
+			// 	Operator : null
+			// 		- empty -> pop "+"
 			while (operator.valueOf() != -2 && operator.compareTo(operatorStack.peek()) <= 0) {
 				postFixString += operatorStack.pop() + " ";
 			}
+
+			// Remove any operators inside parenthesis
 			while (operator.valueOf() == -1 && operatorStack.peek().valueOf() != -2) {
 				postFixString += operatorStack.pop() + " ";
 			}
 			
+			// Remove parenthesis
 			if (operator.valueOf() == -1) {
 				operatorStack.pop();
 			}
 			else {
 				operatorStack.push(operator);
 			}
+
 		}
 		catch (EmptyStackException e) {
 			operatorStack.push(operator);
