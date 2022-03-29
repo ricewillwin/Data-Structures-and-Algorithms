@@ -7,6 +7,9 @@ public class LinkedQueue<E> implements Queue<E> {
 	private Node<E> front;
 	private Node<E> back;
 
+	/**
+	 * Creates an empty Queue.
+	 */
 	public LinkedQueue() {}
 
 	@Override
