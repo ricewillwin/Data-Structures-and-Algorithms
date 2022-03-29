@@ -2,12 +2,12 @@ package StackCalculator.Structures;
 
 import java.util.NoSuchElementException;
 
-public class InputQueue<E> implements Queue<Node<E>> {
+public class LinkedQueue<E> implements Queue<Node<E>> {
 
 	private Node<E> front;
 	private Node<E> back;
 
-	public InputQueue() {}
+	public LinkedQueue() {}
 
 	@Override
 	public boolean isEmpty() {
