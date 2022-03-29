@@ -23,7 +23,7 @@ public class PostfixCalculator {
 		try {
 			digitTwo = memStack.pop();
 			digitOne = memStack.pop();
-			op = createOperator(c);
+			op = Calculator.createOperator(c);
 		}
 		catch (EmptyStackException e){
 			throw new InvalidExpressionException(memStack);
@@ -36,36 +36,6 @@ public class PostfixCalculator {
 			throw new InvalidExpressionException(memStack);
 		}
 
-	}
-
-	/**
-	 * Returns an operator from a character.
-	 * @param c - The character that represents the operator.
-	 * @return Operator - The given operator.
-	 * @throws InvalidOperatorException - If the given character is not a supported operator.
-	 */
-	private static Operator createOperator(char c) throws InvalidOperatorException {
-		if (c == '+') {
-			return new Addition();
-		}
-		else if (c == '-') {
-			return new Subtraction();
-		}
-		else if (c == '*') {
-			return new Multiplication();
-		}
-		else if (c == '/') {
-			return new Division();
-		}
-		else if (c == '(') {
-			return new LeftParenthesis();
-		}
-		else if (c == ')') {
-			return new RightParenthesis();
-		}
-		else {
-			throw new InvalidOperatorException(Character.toString(c));
-		}
 	}
 
 	/**
@@ -88,12 +58,9 @@ public class PostfixCalculator {
 					operate(num.charAt(0));
 				}
 				catch (InvalidExpressionException ee) {
-					System.out.println(memStack);
-					System.out.println(ee);
 					return null;
 				}
 				catch (InvalidOperatorException ee) {
-					System.out.println(ee);
 					return null;
 				}
 			}
@@ -101,7 +68,6 @@ public class PostfixCalculator {
 		int result = memStack.pop();
 		
 		if (!memStack.isEmpty()) {
-			System.out.println(new InvalidExpressionException(memStack));
 			return null;
 		}
 		else {

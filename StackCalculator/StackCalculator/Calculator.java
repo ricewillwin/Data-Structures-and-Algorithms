@@ -14,7 +14,12 @@ public class Calculator {
 	 * @return Integer - Result of the expression.
 	 */
 	public static Integer calculate(String expression) {
-		return PostfixCalculator.calculate(convertInfix(expression));
+		try {
+			return PostfixCalculator.calculate(convertInfix(expression));
+		}
+		catch (Exception e) {
+			return null;
+		}
 	}
 
 	/**
@@ -54,7 +59,7 @@ public class Calculator {
 	 * @return Operator - The given operator.
 	 * @throws InvalidOperatorException - If the given character is not a supported operator.
 	 */
-	private static Operator createOperator(char c) throws InvalidOperatorException {
+	public static Operator createOperator(char c) throws InvalidOperatorException {
 		if (c == '+') {
 			return new Addition();
 		}
@@ -67,6 +72,9 @@ public class Calculator {
 		else if (c == '/') {
 			return new Division();
 		}
+		// else if (c == '%') {
+		// 	return new Modulo();
+		// }
 		else if (c == '(') {
 			return new LeftParenthesis();
 		}
