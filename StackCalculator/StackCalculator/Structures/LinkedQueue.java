@@ -2,7 +2,7 @@ package StackCalculator.Structures;
 
 import java.util.NoSuchElementException;
 
-public class LinkedQueue<E> implements Queue<Node<E>> {
+public class LinkedQueue<E> implements Queue<E> {
 
 	private Node<E> front;
 	private Node<E> back;
@@ -15,27 +15,28 @@ public class LinkedQueue<E> implements Queue<Node<E>> {
 	}
 
 	@Override
-	public void enqueue(Node<E> element) {
+	public void enqueue(E element) {
+		Node<E> newNode = new Node<E>(element, null);
 		if (!isEmpty()) {
-			this.back.setNext(element);
-			this.back = element;
+			this.back.setNext(newNode);
+			this.back = newNode;
 		}
 		else {
-			this.front = element;
-			this.back = element;
+			this.front = newNode;
+			this.back = newNode;
 		}
 	}
 
 	@Override
-	public Node<E> dequeue() throws NoSuchElementException {
-		Node<E> temp = this.front;
+	public E dequeue() throws NoSuchElementException {
+		E temp = this.front.getData();
 		this.front = front.getNext();
 		return temp;
 	}
 
 	@Override
-	public Node<E> front() throws NoSuchElementException {
-		return this.front;
+	public E front() throws NoSuchElementException {
+		return this.front.getData();
 	}
 	
 }
