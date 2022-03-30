@@ -15,7 +15,7 @@ public class Calculator {
 	 */
 	public static String calculate(String expression) {
 		try {
-			return convertInfix(expression) + "   =   " + PostfixCalculator.calculate(convertInfix(expression));
+			return convertInfix(expression) + "\nResult\t->  " + PostfixCalculator.calculate(convertInfix(expression));
 		}
 		catch (Exception e) {
 			return null;

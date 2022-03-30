@@ -30,7 +30,8 @@ public class runner {
 		
 			while (!inputQueue.isEmpty()) {
 				String eq = inputQueue.dequeue();
-				eq += "   =   " + Calculator.calculate(eq);
+				eq += "\nInfix\t->  " + Calculator.calculate(eq);
+				eq = "\nPostfix\t->  " + eq;
 				try {
 					outputOueue.enqueue(eq);
 				}
