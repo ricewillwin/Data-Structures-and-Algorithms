@@ -4,6 +4,7 @@ import java.io.*;
 
 import StackCalculator.Structures.Queue;
 import StackCalculator.Structures.LinkedQueue;
+import StackCalculator.Exceptions.QueueFullException;
 import StackCalculator.Structures.IndexedQueue;
 
 public class runner {
@@ -39,6 +40,9 @@ public class runner {
 					System.out.println(outputOueue.dequeue());
 					outputOueue.enqueue(eq);
 				}
+			}
+			while (!outputOueue.isEmpty()) {
+				System.out.println(outputOueue.dequeue());
 			}
 		
 		

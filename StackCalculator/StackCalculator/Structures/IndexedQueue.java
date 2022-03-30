@@ -1,6 +1,6 @@
 package StackCalculator.Structures;
 
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class IndexedQueue<E> implements Queue<E> {
 

@@ -2,7 +2,7 @@ package StackCalculator.Exceptions;
 
 import StackCalculator.Structures.LinkedStack;
 
-public class InvalidExpressionException extends Exception{
+public class InvalidExpressionException extends Exception {
 
 	private LinkedStack<Integer> stack;
 

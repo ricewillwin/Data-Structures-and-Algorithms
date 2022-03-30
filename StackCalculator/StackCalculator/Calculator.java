@@ -18,7 +18,7 @@ public class Calculator {
 			return convertInfix(expression) + "\nResult\t->  " + PostfixCalculator.calculate(convertInfix(expression));
 		}
 		catch (Exception e) {
-			return null;
+			return null + "\nResult\t->  " + null;
 		}
 	}
 
