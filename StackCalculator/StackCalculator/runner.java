@@ -2,7 +2,9 @@ package StackCalculator;
 
 import java.io.*;
 
+import StackCalculator.Structures.Queue;
 import StackCalculator.Structures.LinkedQueue;
+import StackCalculator.Structures.IndexedQueue;
 
 public class runner {
 	
@@ -10,7 +12,8 @@ public class runner {
 		
 		
 		try {
-			LinkedQueue<String> queue = new LinkedQueue<String>();
+			Queue<String> inputQueue = new LinkedQueue<String>();
+			Queue<String> outputOueue = new IndexedQueue<String>();
 
 			FileReader readFile;
 			readFile = new FileReader("Data-Structures-and-Algorithms/StackCalculator/StackCalculator/exampleExpressions");
@@ -19,23 +22,22 @@ public class runner {
 			String inputString = inFile.readLine();
 
 			while (inputString != null){
-				queue.enqueue(inputString);
+				inputQueue.enqueue(inputString);
 				inputString = inFile.readLine();
 			}
 
 			inFile.close();
 		
-			String title = "| #   |   Expression\t\t\t|   Result   |";
-			String bar = "|-----|---------------------------------|------------|";
-			System.out.println(title + "\n" + bar);
-			int i = 1;
-			while (!queue.isEmpty()) {
-				String eq = queue.dequeue();
-				Integer result =  Calculator.calculate(eq);
-				System.out.println("| " + i + (Integer.toString(i).length() > 1 ? "  " : "   ") 
-													 + "|   " + eq + (eq.length() > 5 ? eq.length() > 13 ? eq.length() > 21 ? "\t" : "\t\t" : "\t\t\t" : "\t\t\t\t")
-													 + "|   " + result + (result == null ? "\t" : result.toString().length() > 3 ? "\t" : "\t\t") + "\033[3D|");
-				i++;
+			while (!inputQueue.isEmpty()) {
+				String eq = inputQueue.dequeue();
+				eq += "   =   " + Calculator.calculate(eq);
+				try {
+					outputOueue.enqueue(eq);
+				}
+				catch (IndexOutOfBoundsException e) {
+					System.out.println(outputOueue.dequeue());
+					outputOueue.enqueue(eq);
+				}
 			}
 		
 		

@@ -13,9 +13,9 @@ public class Calculator {
 	 * @param expression - Expression to solve in infix notation.
 	 * @return Integer - Result of the expression.
 	 */
-	public static Integer calculate(String expression) {
+	public static String calculate(String expression) {
 		try {
-			return PostfixCalculator.calculate(convertInfix(expression));
+			return convertInfix(expression) + "   =   " + PostfixCalculator.calculate(convertInfix(expression));
 		}
 		catch (Exception e) {
 			return null;

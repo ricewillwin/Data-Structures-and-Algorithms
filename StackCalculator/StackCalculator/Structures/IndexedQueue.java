@@ -6,7 +6,8 @@ public class IndexedQueue<E> implements Queue<E> {
 
 	E[] queue;
 	int length = 5;
-	int back = -1;
+	int front = 0;
+	int back = 0;
 
 	/**
 	 * Creates an empty Queue.
@@ -18,31 +19,51 @@ public class IndexedQueue<E> implements Queue<E> {
 
 	@Override
 	public boolean isEmpty() {
-		return queue[0] == null;
+		return queue[front%5] == null;
 	}
 
+	/**
+	 * @throws IndexOutOfBoundsException When the list is full.
+	 */
 	@Override
-	public void enqueue(E element) {
+	public void enqueue(E element) throws IndexOutOfBoundsException {
 
-		if (back >= length-1) {
-			//TODO - do something idfk
+		if (isFull()) {
+			throw new IndexOutOfBoundsException();
 		}
 
-		queue[back] = element;
+		queue[back%5] = element;
 		back++;
 
 	}
 
 	@Override
 	public E dequeue() throws NoSuchElementException {
-		// TODO Auto-generated method stub
-		return null;
+		if (isEmpty()) {
+			throw new NoSuchElementException();
+		}
+		E temp = queue[front%5];
+		queue[front%5] = null;
+		front++;
+		return temp;
 	}
 
 	@Override
 	public E front() throws NoSuchElementException {
-		// TODO Auto-generated method stub
-		return null;
+		return queue[front%5];
 	}
 	
+	/**
+	 * Returns if the list is full.
+	 * @return true - if the list is full.
+	 */
+	private boolean isFull() {
+		for (E i : queue) {
+			if (i == null) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 }
