@@ -1,6 +1,7 @@
 package StackCalculator;
 
 import java.io.*;
+import java.net.*;
 
 import StackCalculator.Structures.Queue;
 import StackCalculator.Structures.LinkedQueue;
@@ -16,7 +17,7 @@ public class runner {
 			Queue<String> outputOueue = new IndexedQueue<String>();
 
 			FileReader readFile;
-			readFile = new FileReader("Data-Structures-and-Algorithms/StackCalculator/StackCalculator/list.txt");
+			readFile = new FileReader("StackCalculator/StackCalculator/list.txt");
 			BufferedReader inFile = new BufferedReader(readFile);
 
 			String inputString = inFile.readLine();
@@ -48,8 +49,6 @@ public class runner {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-
 
 	}
 
