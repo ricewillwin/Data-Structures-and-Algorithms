@@ -4,7 +4,6 @@ import java.io.*;
 
 import StackCalculator.Structures.Queue;
 import StackCalculator.Structures.LinkedQueue;
-import StackCalculator.Exceptions.QueueFullException;
 import StackCalculator.Structures.IndexedQueue;
 
 public class runner {
