@@ -8,8 +8,6 @@ public class runner {
 
 		PriorityQueue<Patient> q = new PriorityQueue<>();
 
-
-
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		String inputStr = "null";
 

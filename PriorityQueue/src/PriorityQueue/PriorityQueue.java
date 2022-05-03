@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import javax.lang.model.element.Element;
-
-public class PriorityQueue<E extends Priority> implements Queue<E> {
+public class PriorityQueue<E extends Priority & Order> implements Queue<E> {
 
 	private List<E> list;
 	private int highestPriority = 10;
+	private int order = 1;
 
 	public PriorityQueue() {
 		list = new ArrayList<>();
@@ -20,6 +19,7 @@ public class PriorityQueue<E extends Priority> implements Queue<E> {
 	}
 
 	public void enqueue(E element) {
+		element.setOrder(order++);
 		list.add(element);
 		if (element.getPriority() < highestPriority) {
 			highestPriority = element.getPriority();

@@ -1,6 +1,5 @@
 package QuickSort;
 import java.util.concurrent.TimeUnit;
-import QuadraticSort.SortArray;
 
 public class qSortArray extends SortArray {
 

@@ -1,10 +1,11 @@
 package PriorityQueue;
 
-public class Patient implements Priority {
+public class Patient implements Priority, Order {
 
 	private String firstName;
 	private String lastName;
 	private int priority;
+	private int order;
 
 	public Patient(String firstName, String lastName, int priority) {
 		this.firstName = firstName;
@@ -52,6 +53,16 @@ public class Patient implements Priority {
 	 */
 	public void setPriority(int priority) {
 		this.priority = priority;
+	}
+
+	@Override
+	public int getOrder() {
+		return order;
+	}
+
+	@Override
+	public void setOrder(int order) {
+		this.order = order;
 	}
 
 	@Override

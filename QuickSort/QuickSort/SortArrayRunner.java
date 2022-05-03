@@ -1,4 +1,4 @@
-package QuadraticSort;
+package QuickSort;
 
 public class SortArrayRunner {
 	
