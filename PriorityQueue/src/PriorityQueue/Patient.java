@@ -1,6 +1,6 @@
 package PriorityQueue;
 
-public class Patient implements Priority, Order {
+public class Patient implements Priority, Order, Comparable<Patient> {
 
 	private String firstName;
 	private String lastName;
@@ -44,7 +44,7 @@ public class Patient implements Priority, Order {
 	/**
 	 * @return int return the priority
 	 */
-	public int getPriority() {
+	public Integer getPriority() {
 		return priority;
 	}
 
@@ -56,7 +56,7 @@ public class Patient implements Priority, Order {
 	}
 
 	@Override
-	public int getOrder() {
+	public Integer getOrder() {
 		return order;
 	}
 
@@ -68,6 +68,17 @@ public class Patient implements Priority, Order {
 	@Override
 	public String toString() {
 		return this.priority + " : " + this.firstName + " " + this.lastName;
+	}
+
+	@Override
+	public int compareTo(Patient o) {
+		Integer pri = this.getPriority().compareTo(o.getPriority());
+		if (pri != 0) {
+			return pri;
+		}
+		else {
+			return this.getOrder().compareTo(o.getOrder());
+		}
 	}
 
 }

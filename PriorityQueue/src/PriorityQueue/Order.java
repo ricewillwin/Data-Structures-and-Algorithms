@@ -6,7 +6,7 @@ public interface Order {
 	 * Returns the order of the elemet
 	 * @return int order
 	 */
-	public abstract int getOrder();
+	public abstract Integer getOrder();
 
 	/**
 	 * Sets the order of the elemet
